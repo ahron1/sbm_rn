@@ -23,33 +23,36 @@ const SideMenu = ({navigation}) => {
     {
       // icon: <Icon type="simpleLine" name="docs" size={40} />,
       icon: <Icon type="material" name="format-list-numbered" size={40} />,
-      name: 'Orders received',
+      name: 'Orders',
       onPress: () => {
         navigation.navigate(ALLORDERS);
       },
     },
 
     {
-      icon: <Icon type="material" name="storefront" size={40} />,
-      name: 'Store Profile',
+      // icon: <Icon type="material" name="storefront" size={40} />,
+      icon: <Icon type="fontisto" name="shopping-store" size={32} />,
+      name: 'Profile',
       onPress: () => {
         navigation.navigate(PROFILE);
       },
     },
     {
       icon: <Icon type="ionicon" name="md-gift-outline" size={40} />,
-      name: 'Store Offers',
+      name: 'Offers',
       onPress: () => {
         navigation.navigate(OFFERS);
       },
     },
+    /*
     {
-      icon: <Icon type="simpleLine" name="badge" size={40} />,
-      name: 'Points Earned',
+      icon: <Icon type="entypo" name="trophy" size={40} />,
+      name: 'Rewards',
       onPress: () => {
         navigation.navigate(REWARDS);
       },
     },
+    */
     {
       icon: <Icon type="ionicon" name="md-people-outline" size={40} />,
       name: 'Customers',
@@ -65,7 +68,7 @@ const SideMenu = ({navigation}) => {
         <Image
           height={1}
           width={1}
-          source={require('../../assets/images/logo2.png')}
+          source={require('../../assets/images/logo3s.png')}
           style={styles.logoImage}
         />
         <Text style={styles.sideBarTopBrandText}>Storebhai</Text>
