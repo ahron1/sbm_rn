@@ -1,4 +1,4 @@
-package com.storebhai_manager.android_user_app;
+package com.storebhai.android_manager_app;
 
 import com.facebook.react.ReactActivity;
 

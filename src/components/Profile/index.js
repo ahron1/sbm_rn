@@ -4,7 +4,7 @@ import {Text, TouchableOpacity, View} from 'react-native';
 const ProfileComponent = () => {
   return (
     <View>
-      <Text>profile screen updated again</Text>
+      <Text>profile screen </Text>
     </View>
   );
 };

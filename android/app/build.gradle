@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.storebhai_manager.android_user_app"
+        applicationId "com.storebhai.android_manager_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
