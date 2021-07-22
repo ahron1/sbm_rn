@@ -31,7 +31,7 @@ const App = () => {
     const fcmToken = await messaging().getToken();
     if (fcmToken) {
       console.log('fcm token is :> ', fcmToken);
-      console.log('fcm messaging() object is :> ', messaging());
+      // console.log('fcm messaging() object is :> ', messaging());
     }
   }, []);
 

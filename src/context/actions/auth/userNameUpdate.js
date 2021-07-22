@@ -21,7 +21,7 @@ const userNameUpdate =
     });
 
     axiosInstance
-      .post('/update_customer_name', {
+      .post('/update_store_name', {
         userName: userName,
       })
       .then(res => {

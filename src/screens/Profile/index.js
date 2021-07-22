@@ -78,7 +78,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (fireBaseUid && phoneNumber && fcmToken) {
-      // console.log('in profile screen. now calling credupdate');
+      console.log('in profile screen. now calling credupdate');
       credUpdate({fireBaseUid, phoneNumber, fcmToken})(authDispatch);
     } else {
       // console.log('in profile screen. creds not yet ready to call credupdate');
@@ -142,12 +142,14 @@ const Profile = () => {
 
   if (numberAuthenticated) {
     // if (authenticated) {
-    // console.log('in profile screen');
+    // console.log('in profile screen, numberauthenticated');
     return <ProfileComponent />;
   }
   if (numberChecked) {
+    // console.log('in profile screen, otp to be verified');
     return <VerifyOtp />;
   }
+  // console.log('in profile screen, number to be authenticated');
   return <PhoneNumber />;
 };
 

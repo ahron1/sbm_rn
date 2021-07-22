@@ -11,7 +11,7 @@ export default () => dispatch => {
   });
 
   axiosInstance
-    .get('/get_customer_details')
+    .get('/get_store_details')
     .then(res => {
       // console.log('in user_details action got response >> ', res.data);
       dispatch({

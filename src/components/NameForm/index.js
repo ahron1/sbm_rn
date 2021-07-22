@@ -57,7 +57,7 @@ const NameForm = ({
   const onSubmitName = () => {
     if (!formAddName.name) {
       setFormErrorsAddName(prev => {
-        return {...prev, name: 'Please enter your full name'};
+        return {...prev, name: 'Please enter the store name'};
       });
     }
     if (
@@ -90,7 +90,7 @@ const NameForm = ({
     <AppModal
       modalVisible={modalVisibleAddName}
       setModalVisible={setModalVisibleAddName}
-      modalTitle={'Name'}
+      modalTitle={'Store Name'}
       modalFooter={<></>}
       onShow={() => console.log('modal shown')}
       // onDismiss={() => console.log('modal closed')}
@@ -105,9 +105,9 @@ const NameForm = ({
             <AppTextInput
               style={styles.input}
               autoCapitalize="words"
-              label="Enter your full name:"
+              label="Enter the name of your store"
               maxLength={30}
-              placeholder="Full Name"
+              placeholder="Top Local Store"
               value={formAddName.name || ''}
               onChangeText={value => {
                 onChangeName({name: 'name', value, isRequired: true});
