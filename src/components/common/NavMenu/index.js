@@ -7,7 +7,7 @@ import styles from './styles';
 const NavMenuComponent = () => {
   return (
     <View style={styles.menuContainer}>
-      <Icon style={styles.menuIcon} type="simpleLine" name="menu" size={25} />
+      <Icon style={styles.menuIcon} type="simpleLine" name="menu" />
       <Text style={styles.menuText}>MENU</Text>
     </View>
   );

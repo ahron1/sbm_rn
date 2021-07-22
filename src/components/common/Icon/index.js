@@ -26,8 +26,6 @@ const getIconFont = type => {
       return Feather;
     case 'ant':
       return AntDesign;
-    case 'simpleLine':
-      return SimpleLineIcon;
     case 'zocial':
       return ZocialIcon;
     case 'simpleLine':

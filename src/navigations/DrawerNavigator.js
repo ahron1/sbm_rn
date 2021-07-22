@@ -1,5 +1,5 @@
 import React from 'react';
-import {createDrawerNavigator, DrawerContent} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import SideMenu from './SideMenu';
 import {HOME_NAVIGATOR} from '../constants/routeNames';
 import HomeNavigator from './HomeNavigator';

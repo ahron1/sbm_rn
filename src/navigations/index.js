@@ -1,15 +1,22 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import DrawerNavigator from './DrawerNavigator';
-
-import HomeNavigator from './HomeNavigator';
+import {StatusBar, View} from 'react-native';
+import DrawerNavigator from './DrawerNavigator.js';
+import colors from '../assets/theme/colors';
 
 const AppNavContainer = () => {
   return (
-    <NavigationContainer>
-      <DrawerNavigator />
-      {/* <HomeNavigator /> */}
-    </NavigationContainer>
+    <View style={{flex: 1}}>
+      <StatusBar
+        backgroundColor={colors.color1_0}
+        barStyle="light-content"
+        hidden={false}
+      />
+      <NavigationContainer>
+        <DrawerNavigator />
+        {/* <HomeNavigator /> */}
+      </NavigationContainer>
+    </View>
   );
 };
 
