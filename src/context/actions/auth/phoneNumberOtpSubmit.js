@@ -7,11 +7,15 @@ import {
 const phoneNumberOtpSubmit =
   ({otpCode, confirmationMethod}) =>
   dispatch => {
-    console.log('in phonenumberotpsubmit. dispatch loading');
     dispatch({
       type: PHONENUMBER_OTP_SUBMIT_LOADING,
     });
-    console.log('in phonenumberotpsubmit. dispatched loading');
+    console.log(
+      'in phonenumberotpsubmit. dispatched loading with code: >',
+      otpCode,
+      ' and confirmation method > ',
+      confirmationMethod,
+    );
 
     confirmationMethod
       .confirm(otpCode)
