@@ -13,8 +13,8 @@ const phoneNumberOtpSubmit =
     console.log(
       'in phonenumberotpsubmit. dispatched loading with code: >',
       otpCode,
-      ' and confirmation method > ',
-      confirmationMethod,
+      // ' and confirmation method > ',
+      // confirmationMethod,
     );
 
     confirmationMethod

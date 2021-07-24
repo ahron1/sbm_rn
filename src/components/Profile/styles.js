@@ -32,6 +32,20 @@ export default ScaledSheet.create({
     marginBottom: '10@s',
     paddingHorizontal: '30@s',
   },
+  profileDetail: {
+    flexDirection: 'row',
+  },
+  profileDetailTitle: {
+    fontSize: '18@s',
+    flex: 3,
+    // fontWeight: '700',
+    // flexWrap: 'wrap',
+  },
+  profileDetailContent: {
+    flex: 2,
+    fontFamily: 'Tillana-Medium',
+    fontSize: '18@s',
+  },
 
   enterNumber: {
     fontSize: '20@s',

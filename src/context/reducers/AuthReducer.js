@@ -289,6 +289,10 @@ const authReducer = (state, {type, payload}) => {
         latitude: payload.latitude,
         longitude: payload.longitude,
 
+        deliveryRadius: payload.delivery_radius,
+        offersPickup: payload.offers_pickup,
+        offersDelivery: payload.offers_delivery,
+
         getUserDetails: {
           ...state.getUserDetails,
           loading: false,

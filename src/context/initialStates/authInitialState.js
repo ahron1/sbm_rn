@@ -17,6 +17,10 @@ export default {
   latitude: null,
   longitude: null,
 
+  deliveryRadius: null,
+  offersPickup: null,
+  offersDelivery: null,
+
   phoneNumberSignInSubmit: {
     error: null,
     loading: false,
@@ -38,6 +42,10 @@ export default {
     loading: false,
   },
   userAddressUpdate: {
+    error: null,
+    loading: false,
+  },
+  storeServicesUpdate: {
     error: null,
     loading: false,
   },

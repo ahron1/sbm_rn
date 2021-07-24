@@ -22,7 +22,7 @@ const userAddressUpdate =
     });
 
     axiosInstance
-      .post('/update_customer_address', {
+      .post('/update_store_address', {
         userAddress: userAddress,
         userCoordinates: userCoordinates,
         geoAccuracy: geoAccuracy,

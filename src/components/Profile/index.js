@@ -14,12 +14,15 @@ import styles from './styles';
 import Container from '../common/Container';
 import CustomButtonSmall from '../common/CustomButtonSmall';
 import colors from '../../assets/theme/colors';
+import StoreServicesForm from '../StoreServicesForm';
 
 Geocoder.init('AIzaSyBw1Ua3oGDMs8WwJyNXLRkpsJSq6Vup0bo'); // use a valid API key
 
 const ProfileComponent = () => {
   const [modalVisibleAddAddress, setModalVisibleAddAddress] = useState(false);
   const [modalVisibleAddName, setModalVisibleAddName] = useState(false);
+  const [modalVisibleStoreServices, setModalVisibleStoreServices] =
+    useState(false);
   const [loadingEditAddress, setLoadingEditAddress] = useState(false);
 
   const [geoAddress, setGeoAddress] = useState({});
@@ -36,6 +39,9 @@ const ProfileComponent = () => {
   const addressAvailable =
     addressLine1 && addressLine2 && city && state && pincode;
   const mobileNumber = authState.mobileNumber;
+  const deliveryRadius = authState.deliveryRadius;
+  const offersPickup = authState.offersPickup;
+  const offersDelivery = authState.offersDelivery;
 
   const setLoadingEditAddressWrapper = x => {
     setLoadingEditAddress(x);
@@ -210,7 +216,8 @@ const ProfileComponent = () => {
               ) : (
                 <View>
                   <Text style={styles.emptySectionText}>
-                    You have not saved your store's name. Please update the name of your store.
+                    You have not saved your store's name. Please update the name
+                    of your store.
                   </Text>
                 </View>
               )}
@@ -235,6 +242,59 @@ const ProfileComponent = () => {
               ) : (
                 <View>
                   <Text style={styles.emptySectionText} />
+                </View>
+              )}
+            </View>
+          </View>
+        </View>
+        <View>
+          <View style={styles.sectionTitle}>
+            <Text style={styles.titleText}>Store Services</Text>
+
+            <CustomButtonSmall
+              style={styles.button}
+              primary
+              title="Edit"
+              // loading={authState.storeServicesUpdate.loading}
+              // disabled={authState.storeServicesUpdate.loading}
+              onPress={() => {
+                setModalVisibleStoreServices(true);
+              }}
+            />
+          </View>
+          <View style={styles.sectionBody}>
+            <View style={styles.sectionText}>
+              {deliveryRadius !== null &&
+              offersDelivery !== null &&
+              offersPickup !== null ? (
+                <View>
+                  <View style={styles.profileDetail}>
+                    <Text style={styles.profileDetailTitle}>Delivery:</Text>
+                    <Text style={styles.profileDetailContent}>
+                      {offersDelivery ? 'Yes' : 'No'}
+                    </Text>
+                  </View>
+                  <View style={styles.profileDetail}>
+                    <Text style={styles.profileDetailTitle}>Pickup:</Text>
+                    <Text style={styles.profileDetailContent}>
+                      {offersPickup ? 'Yes' : 'No'}
+                    </Text>
+                  </View>
+                  <View style={styles.profileDetail}>
+                    <Text style={styles.profileDetailTitle}>
+                      Service Radius:
+                    </Text>
+                    <Text style={styles.profileDetailContent}>
+                      {deliveryRadius / 1000} km
+                    </Text>
+                  </View>
+                </View>
+              ) : (
+                <View>
+                  <Text style={styles.emptySectionText}>
+                    You have not updated your store's service radius or service
+                    details. Please update.
+                  </Text>
                 </View>
               )}
             </View>
@@ -311,6 +371,15 @@ const ProfileComponent = () => {
           <NameForm
             modalVisibleAddName={modalVisibleAddName}
             setModalVisibleAddName={setModalVisibleAddName}
+            // setStoredName={setStoredName}
+            firebaseUid={firebaseUid}
+            currentUserName={userName}
+          />
+        </View>
+        <View>
+          <StoreServicesForm
+            modalVisibleStoreServices={modalVisibleStoreServices}
+            setModalVisibleStoreServices={setModalVisibleStoreServices}
             // setStoredName={setStoredName}
             firebaseUid={firebaseUid}
             currentUserName={userName}
