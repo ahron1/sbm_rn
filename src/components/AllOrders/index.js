@@ -31,27 +31,59 @@ const AllOrdersComponent = ({
   const {navigate} = useNavigation();
   // console.log('in all orders. auth state is: ', authState);
 
-  const addOrderPressed = () => {
-    console.log('in all orders component. add order pressed');
-    // addOrder()(ordersDispatch)(orderId => {
-    addOrder()(ordersDispatch)(orderId => {
-      console.log(
-        'add order successfully dispatched. navigate to new order id',
-        orderId,
-      );
-      navigate(ORDERITEMS, {orderId});
-    });
+  const AddCustomerButton = () => {
+    return (
+      <FloatingCenterButton
+        buttonText="Add customer"
+        iconType="feather"
+        iconName="user-plus"
+        // loading={ordersState.addOrder.loading}
+        // disabled={ordersState.addOrder.loading}
+        circleColor={colors.color3_4}
+        iconColor={colors.color2_4}
+        onPress={() => {
+          console.log('in orders empty component. + button pressed');
+          if (authState.latitude && authState.longitude) {
+            // addOrderPressed();
+          } else {
+            Alert.alert(
+              'Not logged in',
+              'Please log in first to add customers.',
+
+              [
+                {
+                  text: 'OK',
+                  // onPress: () => navigate(PROFILE),
+                },
+              ],
+            );
+          }
+        }}
+      />
+    );
   };
 
   const OrdersListEmptyComponent = () => {
     return (
-      <View style={styles.emptyListView}>
-        <Text style={styles.emptyListText}>
-          You don't have any orders.
-          {'\n'}
-          Touch the "New order" button to create your order.
-        </Text>
-      </View>
+      <>
+        <View style={[styles.emptyListView]}>
+          <View>
+            <Text style={styles.emptyListText}>
+              You don't have any orders.
+              {'\n'}
+              {'\n'}
+              First add some customers.
+              {'\n'}
+              {'\n'}
+              The more customers you have, the higher your store's ranking for
+              new customers
+            </Text>
+          </View>
+        </View>
+        <View style={styles.emptyButtonSection}>
+          <AddCustomerButton />
+        </View>
+      </>
     );
   };
 
@@ -65,12 +97,11 @@ const AllOrdersComponent = ({
           <>
             {dataAllOrders.length > 0 ? (
               <Text style={styles.dashboardItemTitleFreeFlow}>
-                Create a new order or touch an order to view its details and
-                take action.
+                Touch an order to view its details and take action.
               </Text>
             ) : (
               <Text style={styles.dashboardItemTitleFreeFlow}>
-                Create a new order now.
+                Add some customers first.
               </Text>
             )}
           </>
@@ -135,10 +166,7 @@ const AllOrdersComponent = ({
                 {orderId}
               </Text>
             </View>
-            {/* <View style={styles.rowItem}>
-              <Text style={styles.rowItemTitle}>Status Code: </Text>
-              <Text style={styles.rowItemContent}>{orderStatusCode}</Text>
-            </View> */}
+
             <View style={styles.rowItem}>
               <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
                 Date:{' '}
@@ -228,34 +256,7 @@ const AllOrdersComponent = ({
         ListFooterComponent={ListFooterComponent}
         ListHeaderComponent={ListHeaderComponent}
       />
-
-      <FloatingCenterButton
-        buttonText="Start new order"
-        iconType="materialCommunity"
-        iconName="playlist-plus"
-        loading={ordersState.addOrder.loading}
-        disabled={ordersState.addOrder.loading}
-        circleColor={colors.color3_4}
-        iconColor={colors.color2_4}
-        onPress={() => {
-          console.log('in orders component. + button pressed');
-          if (authState.latitude && authState.longitude) {
-            addOrderPressed();
-          } else {
-            Alert.alert(
-              'Not logged in',
-              'Please log in first to create your order.',
-
-              [
-                {
-                  text: 'OK',
-                  onPress: () => navigate(PROFILE),
-                },
-              ],
-            );
-          }
-        }}
-      />
+      <AddCustomerButton />
     </>
   );
 };

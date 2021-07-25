@@ -52,8 +52,8 @@ export default ScaledSheet.create({
     backgroundColor: colors.color2_3,
   },
   emptyListView: {
-    padding: '10@s',
-    marginVertical: '80@s',
+    padding: '20@s',
+    marginTop: '80@s',
   },
 
   emptyListText: {
@@ -147,64 +147,11 @@ export default ScaledSheet.create({
     fontSize: '30@s',
   },
 
-  // titleText: {
-  //   fontSize: '21@s',
-  //   fontWeight: '600',
-  // },
-  // bodyText: {
-  //   fontSize: '20@s',
-  //   fontWeight: '600',
-  // },
-
-  // emptySectionText: {
-  //   alignItems: 'flex-start',
-  //   fontSize: '20@s',
-  //   fontWeight: '600',
-  //   paddingVertical: '20@s',
-  //   textAlign: 'center',
-  // },
-  // sectionText: {
-  //   marginTop: '10@s',
-  //   marginBottom: '10@s',
-  //   paddingHorizontal: '30@s',
-  // },
-
-  // enterNumber: {
-  //   fontSize: '20@s',
-  //   fontWeight: '700',
-  // },
-  // input: {
-  //   fontSize: '25@s',
-  // },
-  // button: {
-  //   paddingHorizontal: '12@s',
-  // },
-  // logoutButton: {},
-  // sectionBody: {
-  //   backgroundColor: colors.primaryBackground,
-  // },
-  // sectionTitle: {
-  //   paddingHorizontal: '20@s',
-  //   paddingVertical: '2@s',
-  //   backgroundColor: colors.secondaryBackground,
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  // },
-  // numberSection: {
-  //   padding: '20@s',
-  // },
-  // buttonSection: {
-  //   paddingHorizontal: '100@s',
-  //   paddingBottom: '10@s',
-  // },
-  // logoutButtonSection: {
-  //   marginTop: '50@s',
-  //   paddingHorizontal: '100@s',
-  // },
-  // hr: {
-  //   borderBottomColor: 'grey',
-  //   borderBottomWidth: '0.5@s',
-  // },
+  emptyButtonSection: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
