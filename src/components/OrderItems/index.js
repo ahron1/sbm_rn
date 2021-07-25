@@ -443,7 +443,7 @@ const OrderItemsComponent = ({
             <View style={styles.dashboardItem}>
               <Text
                 style={[styles.dashboardItemTitle, {color: orderColorText}]}>
-                Your note:{' '}
+                Comment:{' '}
               </Text>
               <Text
                 style={[styles.dashboardItemContent, {color: orderColorText}]}>

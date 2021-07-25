@@ -20,6 +20,7 @@ export default ScaledSheet.create({
     paddingVertical: '10@s',
     // minHeight: '100@s',
     backgroundColor: colors.color2_4,
+    borderWidth: '1.25@s',
   },
   dashboardItem: {
     flexDirection: 'column',
@@ -30,6 +31,10 @@ export default ScaledSheet.create({
     // fontWeight: '700',
     // flexWrap: 'wrap',
   },
+  iconSmall: {
+    fontSize: '40@s',
+  },
+
   dashboardItemText: {
     // flex: 1,
     fontSize: '18@s',
@@ -45,6 +50,8 @@ export default ScaledSheet.create({
     fontFamily: 'Tillana-Medium',
     fontSize: '18@s',
   },
+  sectionWithIcon: {flexDirection: 'row'},
+  rowWithIcon: {flex: 5},
 
   list: {
     // paddingHorizontal: '10@s',

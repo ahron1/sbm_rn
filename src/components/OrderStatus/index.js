@@ -18,6 +18,7 @@ import Icon from '../common/Icon';
 import styles from './styles';
 import {array} from 'yup';
 import colors from '../../assets/theme/colors';
+import {getCurrentCodeNumber} from '../../helpers/orderStatus';
 
 const vw = responsiveWidth;
 const vh = responsiveHeight;
@@ -32,8 +33,7 @@ const OrderStatusComponent = ({
   storeName,
   orderSentTime,
 }) => {
-  // console.log('in order status component. status code is:>> ', orderStatusCode);
-  const currentCodeNumber = Number(orderStatusCode.substr(7, 3));
+  const currentCodeNumber = getCurrentCodeNumber(orderStatusCode);
   const colorDone = colors.color4_3;
   const textColorDone = colors.normalgrey;
   const colorWaiting = colors.lightgrey;

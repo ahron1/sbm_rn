@@ -15,11 +15,16 @@ import addOrder from '../../context/actions/addOrder';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import colors from '../../assets/theme/colors';
-import getOrderStatus from '../../helpers/orderStatus';
+import getOrderStatus, {
+  AllOrdersStatusIcon,
+  allOrdersStatusIcon,
+  getCurrentCodeNumber,
+} from '../../helpers/orderStatus';
 import getDateTime from '../../helpers/dateTimeString';
 import ListItemSeparatorComponentThick from '../common/ListItemSeparatorThick';
 import Icon from '../common/Icon';
 import LoadingView from '../LoadingView';
+import {color} from 'react-native-reanimated';
 
 const AllOrdersComponent = ({
   dataAllOrders,
@@ -30,38 +35,6 @@ const AllOrdersComponent = ({
   const {ordersDispatch, ordersState, authState} = useContext(GlobalContext);
   const {navigate} = useNavigation();
   // console.log('in all orders. auth state is: ', authState);
-
-  const AddCustomerButton = () => {
-    return (
-      <FloatingCenterButton
-        buttonText="Add customer"
-        iconType="feather"
-        iconName="user-plus"
-        // loading={ordersState.addOrder.loading}
-        // disabled={ordersState.addOrder.loading}
-        circleColor={colors.color3_4}
-        iconColor={colors.color2_4}
-        onPress={() => {
-          console.log('in orders empty component. + button pressed');
-          if (authState.latitude && authState.longitude) {
-            // addOrderPressed();
-          } else {
-            Alert.alert(
-              'Not logged in',
-              'Please log in first to add customers.',
-
-              [
-                {
-                  text: 'OK',
-                  // onPress: () => navigate(PROFILE),
-                },
-              ],
-            );
-          }
-        }}
-      />
-    );
-  };
 
   const OrdersListEmptyComponent = () => {
     return (
@@ -80,9 +53,7 @@ const AllOrdersComponent = ({
             </Text>
           </View>
         </View>
-        <View style={styles.emptyButtonSection}>
-          <AddCustomerButton />
-        </View>
+        <View style={styles.emptyButtonSection} />
       </>
     );
   };
@@ -120,7 +91,12 @@ const AllOrdersComponent = ({
       order_id: orderId,
       is_delivery: isDelivery,
       is_pickup: isPickup,
-      store_name: storeName,
+      customer_name: customerName,
+      customer_mobile_number: customerMobileNumber,
+      customer_address_line1: customerAddressLine1,
+      customer_address_line2: customerAddressLine2,
+      customer_pincode: customerPincode,
+      customer_note: customerNote,
     } = order;
 
     const {
@@ -133,23 +109,12 @@ const AllOrdersComponent = ({
 
     const orderCreatedDateTime = getDateTime(new Date(time_100_created));
     const orderSentDateTime = getDateTime(new Date(time_200_customer_sent));
-    //    const orderItemsPreview = orderItems.slice(0, previewItemsNumber).map(x => (
-    //      <View key={x.id}>
-    //        <Text>{x.name}, </Text>
-    //      </View>
-    //    ));
 
     return (
       <Pressable
         onPress={() => {
           navigate(ORDERITEMS, {
             orderId,
-            // orderCreatedDateTime,
-            // orderStatusText,
-            // orderStatusNext,
-            // orderColorCode,
-            // orderStatusCode,
-            // orderColorText,
           });
         }}>
         <View
@@ -158,41 +123,47 @@ const AllOrdersComponent = ({
             color: orderColorText,
           }}>
           <View style={styles.listRow}>
-            <View style={styles.rowItem}>
-              <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
-                Order ID:{' '}
-              </Text>
-              <Text style={[styles.rowItemContent, {color: orderColorText}]}>
-                {orderId}
-              </Text>
+            <View style={styles.sectionWithIcon}>
+              <View style={styles.rowWithIcon}>
+                <View style={styles.rowItem}>
+                  <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
+                    Order ID:{' '}
+                  </Text>
+                  <Text
+                    style={[styles.rowItemContent, {color: orderColorText}]}>
+                    {orderId}
+                  </Text>
+                </View>
+
+                <View style={styles.rowItem}>
+                  <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
+                    Date:{' '}
+                  </Text>
+                  <Text
+                    style={[styles.rowItemContent, {color: orderColorText}]}>
+                    {orderCreatedDateTime > orderSentDateTime
+                      ? orderCreatedDateTime
+                      : orderSentDateTime}
+                  </Text>
+                </View>
+              </View>
+
+              <AllOrdersStatusIcon
+                codeNumber={getCurrentCodeNumber(orderStatusCode)}
+              />
             </View>
 
             <View style={styles.rowItem}>
               <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
-                Date:{' '}
+                Customer:
               </Text>
               <Text style={[styles.rowItemContent, {color: orderColorText}]}>
-                {orderCreatedDateTime > orderSentDateTime
-                  ? orderCreatedDateTime
-                  : orderSentDateTime}
+                {customerName}
               </Text>
             </View>
-            {storeName && (
-              <>
-                <View style={styles.rowItem}>
-                  <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
-                    Store:{' '}
-                  </Text>
-                  <Text
-                    style={[styles.rowItemContent, {color: orderColorText}]}>
-                    {storeName ? storeName : ''}
-                  </Text>
-                </View>
-              </>
-            )}
             <View style={styles.rowItem}>
               <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
-                Status Code:{' '}
+                Code:{' '}
               </Text>
               <Text style={[styles.rowItemContent, {color: orderColorText}]}>
                 {orderStatusCode}
@@ -256,7 +227,34 @@ const AllOrdersComponent = ({
         ListFooterComponent={ListFooterComponent}
         ListHeaderComponent={ListHeaderComponent}
       />
-      <AddCustomerButton />
+
+      <FloatingCenterButton
+        buttonText="Add customer"
+        iconType="feather"
+        iconName="user-plus"
+        // loading={ordersState.addOrder.loading}
+        // disabled={ordersState.addOrder.loading}
+        circleColor={colors.color3_4}
+        iconColor={colors.color2_4}
+        onPress={() => {
+          console.log('in orders empty component. + button pressed');
+          if (authState.latitude && authState.longitude) {
+            // addOrderPressed();
+          } else {
+            Alert.alert(
+              'Not logged in',
+              'Please log in first to add customers.',
+
+              [
+                {
+                  text: 'OK',
+                  // onPress: () => navigate(PROFILE),
+                },
+              ],
+            );
+          }
+        }}
+      />
     </>
   );
 };
