@@ -11,9 +11,9 @@ export default () => dispatch => {
   });
 
   axiosInstance
-    .get('/get_orders')
+    .get('/get_store_orders')
     .then(res => {
-      // console.log('in getorders action got response >> ', res.data);
+      console.log('in getorders action got response >> ', res.data);
       dispatch({
         type: GET_ORDERS_SUCCESS,
         // payload: dataOrders,

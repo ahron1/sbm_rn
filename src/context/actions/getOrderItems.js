@@ -12,13 +12,13 @@ const getOrderItems = orderId => dispatch => {
   });
 
   axiosInstance
-    .get('/get_order_items', {
+    .get('/get_store_order_items', {
       params: {
         orderId: orderId,
       },
     })
     .then(res => {
-      // console.log('in getordersitems >> ');
+      console.log('in getordersitems >> ', res);
       dispatch({
         type: GET_ORDERITEMS_SUCCESS,
         // payload: dataOrders,

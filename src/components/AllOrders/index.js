@@ -29,7 +29,7 @@ const AllOrdersComponent = ({
   // console.log('in all orders component. dataallorders is:> ', dataAllOrders);
   const {ordersDispatch, ordersState, authState} = useContext(GlobalContext);
   const {navigate} = useNavigation();
-  console.log('in all orders. auth state is: ', authState);
+  // console.log('in all orders. auth state is: ', authState);
 
   const addOrderPressed = () => {
     console.log('in all orders component. add order pressed');
