@@ -21,6 +21,9 @@ import {
   GET_USER_DETAILS_FAIL,
   GET_USER_DETAILS_LOADING,
   GET_USER_DETAILS_SUCCESS,
+  STORE_SERVICES_UPDATE_FAIL,
+  STORE_SERVICES_UPDATE_LOADING,
+  STORE_SERVICES_UPDATE_SUCCESS,
 } from '../../constants/actionTypes';
 
 const authReducer = (state, {type, payload}) => {
@@ -308,6 +311,40 @@ const authReducer = (state, {type, payload}) => {
           error: payload
             ? payload
             : 'There was an error updating your name on the server',
+        },
+      };
+    case STORE_SERVICES_UPDATE_LOADING:
+      return {
+        ...state,
+        storeServicesUpdate: {
+          ...state.storeServicesUpdate,
+          loading: true,
+        },
+      };
+    case STORE_SERVICES_UPDATE_SUCCESS:
+      // console.log('auth reducer: user update success - ');
+      return {
+        ...state,
+        offersDelivery: payload.deliveryService,
+        offersPickup: payload.pickupService,
+        deliveryRadius: payload.updatedRadius,
+
+        storeServicesUpdate: {
+          ...state.storeServicesUpdate,
+          loading: false,
+          error: null,
+          // data: payload,
+        },
+      };
+    case STORE_SERVICES_UPDATE_FAIL:
+      return {
+        ...state,
+        storeServicesUpdate: {
+          ...state.storeServicesUpdate,
+          loading: false,
+          error: payload
+            ? payload
+            : 'There was an error updating your services on the server',
         },
       };
   }

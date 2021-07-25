@@ -3,13 +3,10 @@ import colors from '../../assets/theme/colors';
 
 export default ScaledSheet.create({
   input: {
-    // fontSize: '16@s',
-    // maxWidth: '50@s',
     minWidth: '30@s',
+    fontFamily: 'Tillana-SemiBold',
   },
   buttonSection: {
-    // paddingVertical: '10@s',
-    // paddingHorizontal: '10@s',
     marginHorizontal: '30@s',
     marginTop: '20@s',
     marginBottom: '5@s',
@@ -23,9 +20,20 @@ export default ScaledSheet.create({
     flexDirection: 'row',
     paddingVertical: '9@s',
   },
-  listRow: {
-    // paddingHorizontal: '2@s',
+  serviceRow: {
     paddingVertical: '5@s',
+  },
+  radioSection: {
+    alignItems: 'center',
+  },
+  radiusSection: {
+    paddingVertical: '10@s',
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  radiusTitle: {
+    flex: 3,
   },
   rowItemTitle: {
     fontSize: '16@s',
@@ -33,11 +41,11 @@ export default ScaledSheet.create({
     fontWeight: '700',
     // flexWrap: 'wrap',
   },
-  rowItemContent: {
-    // flex: 7,
-    // fontFamily: 'Tillana-Medium',
+  introContent: {
     fontSize: '16@s',
-    // flexWrap: 'wrap',
+  },
+  serviceSection: {
+    paddingVertical: '10@s',
   },
   textSection: {
     // marginVertical: '5@s',

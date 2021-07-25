@@ -285,7 +285,7 @@ const ProfileComponent = () => {
                       Service Radius:
                     </Text>
                     <Text style={styles.profileDetailContent}>
-                      {deliveryRadius / 1000} km
+                      {deliveryRadius} km
                     </Text>
                   </View>
                 </View>
@@ -383,6 +383,9 @@ const ProfileComponent = () => {
             // setStoredName={setStoredName}
             firebaseUid={firebaseUid}
             currentUserName={userName}
+            // deliveryRadius={deliveryRadius}
+            // offersDelivery={offersDelivery}
+            // offersPickup={offersPickup}
           />
         </View>
       </Container>

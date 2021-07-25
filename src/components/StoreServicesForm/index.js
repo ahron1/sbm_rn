@@ -12,15 +12,32 @@ import {ALLORDERS} from '../../constants/routeNames';
 import orderPayment from '../../context/actions/orderPayment';
 import Icon from '../common/Icon';
 import AppTextInput from '../common/AppTextInput';
+import storeServicesUpdate from '../../context/actions/auth/storeServicesUpdate';
 
 const StoreServicesForm = ({
-  // orderId,
-  // customerId,
-  // storeId,
-  // total,
   setModalVisibleStoreServices,
   modalVisibleStoreServices,
 }) => {
+  const {authState, authDispatch} = useContext(GlobalContext);
+  const deliveryRadius = authState.deliveryRadius;
+  const offersPickup = authState.offersPickup;
+  const offersDelivery = authState.offersDelivery;
+  const [formRadius, setFormRadius] = useState(
+    !deliveryRadius ? {radius: '1'} : {radius: deliveryRadius.toString()},
+  );
+  const [formErrorsRadius, setFormErrorsRadius] = useState({});
+  const onChangeRadius = ({value}) => {
+    setFormRadius({...formRadius, radius: value});
+    if (value === '') {
+      setFormErrorsRadius(prev => {
+        return {...prev, radius: 'Required'};
+      });
+    } else {
+      setFormErrorsRadius(prev => {
+        return {...prev, radius: null};
+      });
+    }
+  };
   const label1 = 'Yes';
   const label2 = 'No';
   const deliveryRadioButtonsData = [
@@ -28,13 +45,16 @@ const StoreServicesForm = ({
       id: '1',
       label: label1,
       value: 'offers_delivery_true',
-      selected: true,
+      selected:
+        offersDelivery !== null ? (offersDelivery ? true : false) : false,
       labelStyle: {fontSize: 18},
     },
     {
       id: '2',
       label: label2,
       value: 'offers_delivery_false',
+      selected:
+        offersDelivery !== null ? (offersDelivery ? false : true) : false,
       labelStyle: {fontSize: 18},
     },
   ];
@@ -43,13 +63,14 @@ const StoreServicesForm = ({
       id: '1',
       label: label1,
       value: 'offers_pickup_true',
-      selected: true,
+      selected: offersPickup !== null ? (offersPickup ? true : false) : false,
       labelStyle: {fontSize: 18},
     },
     {
       id: '2',
       label: label2,
       value: 'offers_pickup_false',
+      selected: offersPickup !== null ? (offersPickup ? false : true) : false,
       labelStyle: {fontSize: 18},
     },
   ];
@@ -60,9 +81,6 @@ const StoreServicesForm = ({
   const [pickupRadioButtons, setPickupRadioButtons] = useState(
     pickupRadioButtonsData,
   );
-  // useEffect(() => {
-  // setRadioButtons(radioButtonsData);
-  // }, [selectedStoreDetails]);
 
   function onPressDeliveryRadioButton(radioButtonsArray) {
     setDeliveryRadioButtons(radioButtonsArray);
@@ -71,25 +89,55 @@ const StoreServicesForm = ({
     setPickupRadioButtons(radioButtonsArray);
   }
 
-  const onSubmitMakePayment = () => {
-    let isPaymentCredit;
-    let isPaymentOnline;
-    let isPaymentCash;
+  const onSubmitStoreServices = () => {
+    if (!formRadius.radius) {
+      setFormErrorsRadius(prev => {
+        return {...prev, radius: 'Required'};
+      });
+      console.log('in store submit form, submit pressed. missing radius');
+      return;
+    }
+    const updatedRadius = Number(formRadius.radius);
+    let deliveryService;
+    let pickupService;
     if (deliveryRadioButtons[0].selected || deliveryRadioButtons[1].selected) {
       if (deliveryRadioButtons[0].selected) {
-        console.log(' . cash ');
-        isPaymentCash = true;
-        isPaymentOnline = false;
-        isPaymentCredit = false;
+        console.log('delivery yes');
+        deliveryService = true;
       } else if (deliveryRadioButtons[1].selected) {
-        console.log(' . online ');
-        isPaymentCash = false;
-        isPaymentOnline = true;
-        isPaymentCredit = false;
+        console.log('delivery no');
+        deliveryService = false;
       }
     } else {
-      Alert.alert('Payment method', 'Please choose your payment method');
+      Alert.alert('Delivery service', 'Choose yes or no for delivery service');
+      return;
     }
+    if (pickupRadioButtons[0].selected || pickupRadioButtons[1].selected) {
+      if (pickupRadioButtons[0].selected) {
+        console.log('pickup yes');
+        pickupService = true;
+      } else if (pickupRadioButtons[1].selected) {
+        console.log('pickup no');
+        pickupService = false;
+      }
+    } else {
+      Alert.alert('Pickup service', 'Choose yes or no for pickup service');
+      return;
+    }
+    console.log(
+      'in store submit form, submit pressed. ALL OK \n',
+      'delivery is: ',
+      deliveryService,
+      '\n',
+      'pickup is: ',
+      pickupService,
+      '\n',
+      'delivery radius is ',
+      updatedRadius,
+    );
+    storeServicesUpdate({deliveryService, pickupService, updatedRadius})(
+      authDispatch,
+    )(() => setModalVisibleStoreServices(false));
   };
 
   return (
@@ -102,22 +150,22 @@ const StoreServicesForm = ({
       // onDismiss={() => console.log('modal closed')}
       onModalClose={() => {
         console.log('modal closed');
-        // setFormErrorsOrderSend({});
-        // setFormOrderSend({});
+        setFormErrorsRadius({});
+        // setFormRadius()
       }}
       modalBody={
         <View>
           <View style={styles.introSection}>
-            <Text style={styles.rowItemContent}>
+            <Text style={styles.introContent}>
               Select which services your store offers and your service area
               radius.
             </Text>
           </View>
-          <View style={{paddingVertical: 10}}>
-            <View style={styles.listRow}>
+          <View style={styles.serviceSection}>
+            <View style={styles.serviceRow}>
               <Text style={styles.textBold}>Pickup service</Text>
             </View>
-            <View style={{alignItems: 'center'}}>
+            <View style={styles.radioSection}>
               <RadioGroup
                 radioButtons={pickupRadioButtons}
                 onPress={onPressPickupRadioButton}
@@ -126,11 +174,11 @@ const StoreServicesForm = ({
               />
             </View>
           </View>
-          <View style={{}}>
-            <View style={styles.listRow}>
+          <View style={styles.serviceSection}>
+            <View style={styles.serviceRow}>
               <Text style={styles.textBold}>Delivery service</Text>
             </View>
-            <View style={{alignItems: 'center'}}>
+            <View style={styles.radioSection}>
               <RadioGroup
                 radioButtons={deliveryRadioButtons}
                 onPress={onPressDeliveryRadioButton}
@@ -140,45 +188,33 @@ const StoreServicesForm = ({
             </View>
           </View>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignContent: 'center',
-              alignItems: 'center',
-              // alignSelf: 'center',
-            }}>
-            <View style={{flex: 3}}>
-              <Text style={styles.textBold}>Service area: </Text>
+          <View style={styles.radiusSection}>
+            <View style={styles.radiusTitle}>
+              <Text style={styles.textBold}>Service area:{'  '} </Text>
             </View>
             {/* <View style={{flex: 1}}> */}
-            <View style={{}}>
+            <View>
               <AppTextInput
                 style={styles.input}
-                // label="Service area (in kilometers):"
                 keyboardType="numeric"
-                defaultValue="1"
-                // placeholder="Pincode"
-                // maxLength={6}
-                // onChangeText={handleChange('pincode')}
-                // onBlur={handleBlur('pincode')}
-                // value={values.pincode}
+                defaultValue={!deliveryRadius ? '1' : deliveryRadius.toString()}
+                value={formRadius.radius || ''}
+                maxLength={4}
+                onChangeText={value => {
+                  onChangeRadius({value});
+                }}
+                error={formErrorsRadius.radius}
               />
-
-              {/*
-              {errors.pincode && touched.pincode && (
-                <Text style={styles.errorText}>{errors.pincode}</Text>
-              )}
-*/}
             </View>
-            <View style={{flex: 3}}>
-              <Text style={styles.text}> kilometers</Text>
+            <View style={styles.radiusTitle}>
+              <Text style={styles.text}>{'  '}kilometers</Text>
             </View>
           </View>
 
           <View>
             <CustomButtonMedium
               title="OK"
-              onPress={onSubmitMakePayment}
+              onPress={onSubmitStoreServices}
               style={styles.buttonSection}
               // loading={ordersState.payOrder.loading}
               // disabled={ordersState.payOrder.loading}
