@@ -84,6 +84,8 @@ export default ScaledSheet.create({
   listRowItem: {
     flexDirection: 'row',
     paddingVertical: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   itemTitle: {
     fontFamily: 'sans-serif-smallcaps',
@@ -123,9 +125,12 @@ export default ScaledSheet.create({
     flexWrap: 'wrap',
   },
   availabilityInfo: {
-    fontFamily: 'Tillana-Medium',
+    // fontFamily: 'Tillana-Medium',
     flex: 0.75,
     flexWrap: 'wrap',
+    fontSize: '20@s',
+    color: 'red',
+    fontWeight: '700',
   },
   checkMark: {
     color: colors.color4_1,

@@ -152,10 +152,11 @@ const AllOrdersComponent = ({
             </View>
 
             <View style={styles.rowItem}>
-              <Text style={[styles.rowItemTitle, {color: orderColorText}]}>
+              <Text style={[styles.rowItemTitleBold, {color: orderColorText}]}>
                 Customer:
               </Text>
-              <Text style={[styles.rowItemContent, {color: orderColorText}]}>
+              <Text
+                style={[styles.rowItemContentBold, {color: orderColorText}]}>
                 {customerName}
               </Text>
             </View>

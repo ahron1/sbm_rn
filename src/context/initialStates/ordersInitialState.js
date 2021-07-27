@@ -14,13 +14,18 @@ export default {
     error: null,
     loading: false,
   },
-  sendOrder: {
-    data: [],
+  confirmOrder: {
+    // data: [],
     error: null,
     loading: false,
   },
-  payOrder: {
-    data: [],
+  confirmPayment: {
+    // data: [],
+    error: null,
+    loading: false,
+  },
+  confirmFulfil: {
+    // data: [],
     error: null,
     loading: false,
   },

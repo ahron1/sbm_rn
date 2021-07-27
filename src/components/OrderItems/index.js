@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {useState, useEffect} from 'react';
 import {
+  Alert,
   Button,
   FlatList,
   Linking,
@@ -12,7 +13,6 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import ViewItem from '../ViewItem';
 import AddItem from '../AddItem';
-import MakePayment from '../MakePayment';
 import FloatingLeftButton from '../common/FloatingLeftButton';
 import FloatingRightButton from '../common/FloatingRightButton';
 import FloatingCenterButton from '../common/FloatingCenterButton';
@@ -27,6 +27,9 @@ import deleteOrder from '../../context/actions/deleteOrder';
 import getOrderStatus from '../../helpers/orderStatus';
 import LoadingView from '../LoadingView';
 import getDateTime from '../../helpers/dateTimeString';
+import confirmOrder from '../../context/actions/confirmOrder';
+import confirmFulfil from '../../context/actions/confirmFulfil';
+import confirmPayment from '../../context/actions/confirmPayment';
 
 // const OrderItemsComponent = ({orderStatusDetails, dataOrderItems}) => {
 const OrderItemsComponent = ({
@@ -39,7 +42,6 @@ const OrderItemsComponent = ({
   const [currentItemId, setCurrentItemId] = useState(null);
   const [modalVisibleViewItem, setModalVisibleViewItem] = useState(false);
   const [modalVisibleAddItem, setModalVisibleAddItem] = useState(false);
-  const [modalVisibleMakePayment, setModalVisibleMakePayment] = useState(false);
   const {navigate} = useNavigation();
 
   // const {
@@ -178,6 +180,7 @@ const OrderItemsComponent = ({
         );
         break;
 
+      /*
       case 'status_600_payment_made':
         console.log('in order items component. buttons func. status 500');
         buttons = (
@@ -198,23 +201,50 @@ const OrderItemsComponent = ({
           </View>
         );
         break;
+        */
 
+      case 'status_600_payment_made':
       case 'status_500_customer_received':
       case 'status_400_store_fulfilled':
-      case 'status_300_store_checked':
         console.log('in order items component. buttons func. status 500');
         buttons = (
           <View>
             <View>
               <FloatingCenterButton
-                buttonText="Make payment"
+                buttonText="Confirm payment"
                 iconType="fontisto"
                 iconName="inr"
-                iconColor={colors.color2_3}
+                iconColor={colors.color2_2_4}
                 circleColor={colors.color3_4}
                 onPress={() => {
-                  console.log('in order items component. payment pressed');
-                  setModalVisibleMakePayment(true);
+                  console.log(
+                    'in order items component. payment confirm pressed. ',
+                  );
+                  confirmPayment({
+                    orderId,
+                  })(ordersDispatch)(() => {
+                    console.log(
+                      'in order items components. payment confirmed . going back to all orders',
+                    );
+                    Alert.alert(
+                      'Confirm payment    ₹ ' + total,
+                      'Thank you for completing the order.' +
+                        '\n\nAfter receiving payment from the customer, press OK to confirm.' +
+                        '\n\nIf you have not yet received the payment, press Cancel',
+                      [
+                        {
+                          text: 'Cancel',
+                        },
+                        {
+                          text: 'OK',
+                          onPress: () => {
+                            navigate(ALLORDERS);
+                            // console.log('OKKKKK');
+                          },
+                        },
+                      ],
+                    );
+                  });
                 }}
               />
             </View>
@@ -247,31 +277,50 @@ const OrderItemsComponent = ({
         break;
         */
 
-      /*
       case 'status_300_store_checked':
         buttons = (
           <View>
             <View>
               <FloatingCenterButton
-                buttonText="Check status"
-                iconType="ant"
-                iconName="questioncircle"
-                circleColor={colors.color4_2}
+                buttonText="Order fulfilled"
+                iconType="fontisto"
+                iconName="shopping-bag-1"
+                circleColor={colors.color3_4}
                 iconColor={colors.color2_4}
                 onPress={() => {
-                  console.log('in order items component. check status pressed');
                   console.log(
-                    'in order items component. check status pressed. now navigating to order status scren',
+                    'in order items component. order fulfilled pressed. ',
                   );
-                  // navigate(ORDERSTATUS, {orderStatusCode: orderStatusCode});
-                  navigateOrderStatus();
+                  confirmFulfil({
+                    orderId,
+                  })(ordersDispatch)(() => {
+                    console.log(
+                      'in order items components. confirmed order fulfillment. going back to all orders',
+                    );
+                    Alert.alert(
+                      'Order fulfillment',
+                      'Thank you for fulfilling the order.' +
+                        '\n\nAfter handing over the items to the customer, press OK to confirm.' +
+                        '\n\nIf you have not yet given the items to the customer, press Cancel',
+                      [
+                        {
+                          text: 'Cancel',
+                        },
+                        {
+                          text: 'OK',
+                          onPress: () => {
+                            navigate(ALLORDERS);
+                          },
+                        },
+                      ],
+                    );
+                  });
                 }}
               />
             </View>
           </View>
         );
         break;
-        */
 
       case 'status_200_customer_sent':
         buttons = !allItemsChecked ? (
@@ -304,10 +353,28 @@ const OrderItemsComponent = ({
                 iconColor={colors.color2_4}
                 onPress={() => {
                   console.log(
-                    'in order items component. check status pressed. order status code is:>> ',
-                    orderStatusCode,
+                    'in order items component. confirm order pressed. ',
                   );
-                  navigateOrderStatus();
+                  confirmOrder({
+                    orderId,
+                  })(ordersDispatch)(() => {
+                    console.log(
+                      'in order items components. successfully confirmed order . going back to all orders',
+                    );
+                    Alert.alert(
+                      'Order Confirmed',
+                      'Thank you for confirming the order.' +
+                        '\n\nPlease give the items to the customer as soon as possible.',
+                      [
+                        {
+                          text: 'OK',
+                          onPress: () => {
+                            navigate(ALLORDERS);
+                          },
+                        },
+                      ],
+                    );
+                  });
                 }}
               />
             </View>
@@ -556,7 +623,7 @@ const OrderItemsComponent = ({
                     />
                   )
                 ) : (
-                  ''
+                  '?'
                 )}
               </Text>
 
@@ -603,7 +670,10 @@ const OrderItemsComponent = ({
           <Text style={[styles.dashboardItemTitleFreeFlow, styles.price]}>
             {checked}
           </Text>
-          <Text style={styles.dashboardItemTitleFreeFlow}> items. </Text>
+          <Text style={styles.dashboardItemTitleFreeFlow}>
+            {' '}
+            items checked.{' '}
+          </Text>
           <Text style={styles.dashboardItemTitleFreeFlow}>Total price: </Text>
           <Text style={[styles.dashboardItemTitleFreeFlow, styles.price]}>
             {total ? (
@@ -647,14 +717,6 @@ const OrderItemsComponent = ({
         modalVisibleAddItem={modalVisibleAddItem}
         setModalVisibleAddItem={setModalVisibleAddItem}
         orderId={orderId}
-      />
-
-      <MakePayment
-        modalVisibleMakePayment={modalVisibleMakePayment}
-        setModalVisibleMakePayment={setModalVisibleMakePayment}
-        orderId={orderId}
-        total={total}
-        storeId={storeId ? storeId : null}
       />
     </>
   );

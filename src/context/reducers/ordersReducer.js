@@ -5,18 +5,18 @@ import {
   ADD_ORDER_LOADING,
   ADD_ORDER_SUCCESS,
   ADD_ORDER_FAIL,
-  EDIT_ORDER_LOADING,
-  EDIT_ORDER_SUCCESS,
-  EDIT_ORDER_FAIL,
-  SEND_ORDER_LOADING,
-  SEND_ORDER_SUCCESS,
-  SEND_ORDER_FAIL,
+  CONFIRM_ORDER_LOADING,
+  CONFIRM_ORDER_SUCCESS,
+  CONFIRM_ORDER_FAIL,
   DELETE_ORDER_LOADING,
   DELETE_ORDER_SUCCESS,
   DELETE_ORDER_FAIL,
-  PAY_ORDER_FAIL,
-  PAY_ORDER_LOADING,
-  PAY_ORDER_SUCCESS,
+  CONFIRM_PAYMENT_FAIL,
+  CONFIRM_PAYMENT_LOADING,
+  CONFIRM_PAYMENT_SUCCESS,
+  CONFIRM_FULFIL_FAIL,
+  CONFIRM_FULFIL_LOADING,
+  CONFIRM_FULFIL_SUCCESS,
 } from '../../constants/actionTypes';
 
 const ordersReducer = (state, {type, payload}) => {
@@ -120,70 +120,81 @@ const ordersReducer = (state, {type, payload}) => {
         },
       };
 
-    case SEND_ORDER_LOADING:
+    case CONFIRM_ORDER_LOADING:
       return {
         ...state,
-        sendOrder: {
-          ...state.sendOrder,
+        confirmOrder: {
+          ...state.confirmOrder,
           loading: true,
         },
       };
-    case SEND_ORDER_SUCCESS:
+    case CONFIRM_ORDER_SUCCESS:
       return {
         ...state,
-        sendOrder: {
-          ...state.sendOrder,
+        confirmOrder: {
+          ...state.confirmOrder,
           loading: false,
           error: null,
         },
-        // getOrders: {
-        // ...state.getOrders,
-        // loading: false,
-        // data: [
-        // ...state.getOrders.data.filter(x => x.order_id !== payload.orderId),
-        // payload,
-        // ],
-        // },
       };
-    case SEND_ORDER_FAIL:
+    case CONFIRM_ORDER_FAIL:
       return {
         ...state,
-        sendOrder: {
-          ...state.sendOrder,
+        confirmOrder: {
+          ...state.confirmOrder,
           loading: false,
           error: payload,
         },
       };
-    case PAY_ORDER_LOADING:
+    case CONFIRM_FULFIL_LOADING:
       return {
         ...state,
-        payOrder: {
-          ...state.payOrder,
+        confirmFulfil: {
+          ...state.confirmFulfil,
           loading: true,
         },
       };
-    case PAY_ORDER_SUCCESS:
+    case CONFIRM_FULFIL_SUCCESS:
       return {
         ...state,
-        payOrder: {
-          ...state.payOrder,
+        confirmFulfil: {
+          ...state.confirmFulfil,
           loading: false,
           error: null,
         },
-        // getOrders: {
-        // ...state.getOrders,
-        // loading: false,
-        // data: [
-        // ...state.getOrders.data.filter(x => x.order_id !== payload.orderId),
-        // payload,
-        // ],
-        // },
       };
-    case PAY_ORDER_FAIL:
+    case CONFIRM_FULFIL_FAIL:
       return {
         ...state,
-        payOrder: {
-          ...state.payOrder,
+        confirmFulfil: {
+          ...state.confirmFulfil,
+          loading: false,
+          error: payload,
+        },
+      };
+
+    case CONFIRM_PAYMENT_LOADING:
+      return {
+        ...state,
+        confirmPayment: {
+          ...state.confirmPayment,
+          loading: true,
+        },
+      };
+    case CONFIRM_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        confirmPayment: {
+          ...state.confirmPayment,
+          loading: false,
+          error: null,
+        },
+      };
+    case CONFIRM_PAYMENT_FAIL:
+      return {
+        ...state,
+        confirmPayment: {
+          ...state.confirmPayment,
           loading: false,
           error: payload,
         },
