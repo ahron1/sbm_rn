@@ -197,7 +197,8 @@ const StoreServicesForm = ({
               <AppTextInput
                 style={styles.input}
                 keyboardType="numeric"
-                defaultValue={!deliveryRadius ? '1' : deliveryRadius.toString()}
+                // defaultValue={!deliveryRadius ? '1' : deliveryRadius.toString()}
+                // defaultValue={formRadius.radius}
                 value={formRadius.radius || ''}
                 maxLength={4}
                 onChangeText={value => {

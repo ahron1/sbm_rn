@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
-import {useState} from 'react';
 import {useContext} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/core';
-import {Text, Pressable, View} from 'react-native';
 import OrderItemsComponent from '../../components/OrderItems';
 import {GlobalContext} from '../../context/Provider';
 import getOrderItems from '../../context/actions/getOrderItems';
@@ -21,10 +19,14 @@ const OrderItems = ({navigation}) => {
   const {setOptions, toggleDrawer} = useNavigation();
   const {orderItemsDispatch, orderItemsState} = useContext(GlobalContext);
 
+  console.log(
+    'in order items screen. orderitems statte is>> ',
+    orderItemsState,
+  );
   const {
     data: dataGetOrderItems,
     loading: loadingGetOrderItems,
-    error: errorGetOrderItems,
+    // error: errorGetOrderItems,
   } = orderItemsState.getOrderItems;
 
   useEffect(() => {

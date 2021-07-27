@@ -76,7 +76,7 @@ const getOrderStatus = order => {
       : status_200_customer_sent === true
       ? {
           orderStatusText: 'Customer sent the order',
-          orderStatusNext: 'You will check prices and availability',
+          orderStatusNext: 'Touch each item to confirm price and availability',
           orderStatusCode: 'status_200_customer_sent',
           orderColorCode: colors.color2_2_4,
           orderColorText: colors.color1_0,
@@ -153,6 +153,7 @@ const AllOrdersStatusIcon = codeNumber => {
         </>
       );
       break;
+    case 500:
     case 400:
       statusIcon = (
         <>
@@ -161,7 +162,7 @@ const AllOrdersStatusIcon = codeNumber => {
               styles.iconContainer,
               {
                 // borderColor: colors.color3_4,
-                backgroundColor: colors.grey,
+                // backgroundColor: colors.grey,
               },
             ]}>
             <Icon
@@ -222,7 +223,7 @@ const AllOrdersStatusIcon = codeNumber => {
               styles.iconContainer,
               {
                 // borderColor: colors.color3_4,
-                backgroundColor: colors.grey,
+                // backgroundColor: colors.grey,
               },
             ]}>
             <Icon

@@ -138,6 +138,7 @@ export default ScaledSheet.create({
   price: {
     color: colors.color4_1,
     fontSize: '18@s',
+    fontWeight: '700',
   },
 
   // titleText: {

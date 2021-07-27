@@ -2,15 +2,9 @@ import {
   GET_ORDERITEMS_LOADING,
   GET_ORDERITEMS_SUCCESS,
   GET_ORDERITEMS_FAIL,
-  ADD_ORDERITEM_LOADING,
-  ADD_ORDERITEM_SUCCESS,
-  ADD_ORDERITEM_FAIL,
   EDIT_ORDERITEM_LOADING,
   EDIT_ORDERITEM_SUCCESS,
   EDIT_ORDERITEM_FAIL,
-  DELETE_ORDERITEM_LOADING,
-  DELETE_ORDERITEM_SUCCESS,
-  DELETE_ORDERITEM_FAIL,
 } from '../../constants/actionTypes';
 
 const orderItemsReducer = (state, {type, payload}) => {
@@ -43,61 +37,20 @@ const orderItemsReducer = (state, {type, payload}) => {
         },
       };
 
-    case ADD_ORDERITEM_LOADING:
+    case EDIT_ORDERITEM_LOADING:
       return {
         ...state,
-        addOrderItem: {
-          ...state.addOrderItems,
+        editOrderItem: {
+          ...state.editOrderItems,
           loading: true,
         },
       };
-    case ADD_ORDERITEM_SUCCESS:
+    case EDIT_ORDERITEM_SUCCESS:
       return {
         ...state,
-        addOrderItem: {
-          ...state.addOrderItems,
+        editOrderItem: {
+          ...state.editOrderItems,
           loading: false,
-          data: payload,
-          error: null,
-        },
-
-        getOrderItems: {
-          ...state.getOrderItems,
-          loading: false,
-          data: [...state.getOrderItems.data, payload.newOrderDetails],
-          error: null,
-        },
-      };
-    case ADD_ORDERITEM_FAIL:
-      return {
-        ...state,
-        addOrderItem: {
-          ...state.addOrderItems,
-          loading: false,
-          error: payload,
-        },
-      };
-
-    case DELETE_ORDERITEM_LOADING:
-      console.log('in reducers delete order item. now dispatching loading. ');
-      return {
-        ...state,
-        deleteOrderItem: {
-          ...state.deleteOrderItems,
-          loading: true,
-        },
-      };
-    case DELETE_ORDERITEM_SUCCESS:
-      console.log(
-        'in reducers delete order item. now dispatching success. order item id:>> ',
-        payload,
-      );
-      return {
-        ...state,
-        deleteOrderItem: {
-          ...state.deleteOrderItems,
-          loading: false,
-          // data: payload,
           error: null,
         },
 
@@ -105,16 +58,19 @@ const orderItemsReducer = (state, {type, payload}) => {
           ...state.getOrderItems,
           loading: false,
           error: null,
-          data: state.getOrderItems.data.filter(
-            x => x.order_item_id !== payload.orderItemId,
-          ),
+          data: [
+            ...state.getOrderItems.data.filter(
+              x => x.order_item_id !== payload.order_item_id,
+            ),
+            payload,
+          ],
         },
       };
-    case DELETE_ORDERITEM_FAIL:
+    case EDIT_ORDERITEM_FAIL:
       return {
         ...state,
-        deleteOrderItem: {
-          ...state.deleteOrderItems,
+        editOrderItem: {
+          ...state.editOrderItems,
           loading: false,
           error: payload,
         },

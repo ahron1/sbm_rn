@@ -36,6 +36,7 @@ const OrderItemsComponent = ({
 }) => {
   const {ordersDispatch, ordersState} = useContext(GlobalContext);
   const [currentItem, setCurrentItem] = useState({});
+  const [currentItemId, setCurrentItemId] = useState(null);
   const [modalVisibleViewItem, setModalVisibleViewItem] = useState(false);
   const [modalVisibleAddItem, setModalVisibleAddItem] = useState(false);
   const [modalVisibleMakePayment, setModalVisibleMakePayment] = useState(false);
@@ -91,12 +92,19 @@ const OrderItemsComponent = ({
   // the conditional assignment is to take care of deletion where the order item details are no longer found after deletion
 
   let total;
+  let checked;
   if (Array.isArray(dataOrderItems) && dataOrderItems.length > 0) {
     let prices = dataOrderItems.map(a => a.price * a.available);
     total = prices.reduce((accumulator, currentValue, currentIndex, array) => {
       return accumulator + currentValue;
     }, 0);
+
+    let done = dataOrderItems.map(a => (a.available === null ? 0 : 1));
+    checked = done.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    });
   }
+  const allItemsChecked = checked < dataOrderItems.length ? false : true;
 
   // const {orderId, orderPrice, orderDate, orderStatus, orderRatingStars} = order;
 
@@ -266,7 +274,7 @@ const OrderItemsComponent = ({
         */
 
       case 'status_200_customer_sent':
-        buttons = (
+        buttons = !allItemsChecked ? (
           <View>
             <View>
               <FloatingCenterButton
@@ -275,6 +283,25 @@ const OrderItemsComponent = ({
                 iconName="questioncircle"
                 iconColor={colors.color2_4}
                 circleColor={colors.color4_2}
+                onPress={() => {
+                  console.log(
+                    'in order items component. check status pressed. order status code is:>> ',
+                    orderStatusCode,
+                  );
+                  navigateOrderStatus();
+                }}
+              />
+            </View>
+          </View>
+        ) : (
+          <View>
+            <View>
+              <FloatingCenterButton
+                buttonText="Confirm Order"
+                iconType="fa5"
+                iconName="check"
+                circleColor={colors.color3_4}
+                iconColor={colors.color2_4}
                 onPress={() => {
                   console.log(
                     'in order items component. check status pressed. order status code is:>> ',
@@ -410,18 +437,6 @@ const OrderItemsComponent = ({
                 : getDateTime(new Date(time_100_created))}
             </Text>
           </View>
-          {storeName && (
-            <View style={styles.dashboardItem}>
-              <Text
-                style={[styles.dashboardItemTitle, {color: orderColorText}]}>
-                Store:{' '}
-              </Text>
-              <Text
-                style={[styles.dashboardItemContent, {color: orderColorText}]}>
-                {storeName}
-              </Text>
-            </View>
-          )}
 
           {(isPickup || isDelivery) && (
             <View style={styles.dashboardItem}>
@@ -503,7 +518,7 @@ const OrderItemsComponent = ({
 
   const renderItem = ({item}) => {
     const {
-      order_item_id: itemId,
+      order_item_id: orderItemId,
       name: itemName,
       quantity: itemQuantity,
       price: itemPrice,
@@ -517,6 +532,11 @@ const OrderItemsComponent = ({
           onPress={() => {
             setCurrentItem(item);
             setModalVisibleViewItem(true);
+            setCurrentItemId(orderItemId);
+            // console.log(
+            //   '-----------------in order item component. order item id is ',
+            //   orderItemId,
+            // );
           }}>
           <View>
             <View style={styles.listRowItem}>
@@ -562,21 +582,30 @@ const OrderItemsComponent = ({
   ) : (
     <>
       <View style={styles.dashboard}>
-        {/* <View style={styles.dashboardItem}>
-          <Text style={styles.dashboardItemTitle}>Order Id: </Text>
-          <Text style={styles.dashboardItemContent}>{orderId}</Text>
-        </View> */}
+        {currentCodeNumber === 200 && (
+          <View style={styles.dashboardItem}>
+            <Text
+              style={[
+                styles.dashboardItemTitleFreeFlow,
+                {color: !allItemsChecked ? colors.color3_4 : colors.color4_1},
+              ]}>
+              {!allItemsChecked
+                ? 'PENDING ITEMS: ' +
+                  JSON.stringify(dataOrderItems.length - checked) +
+                  ' out of ' +
+                  JSON.stringify(dataOrderItems.length)
+                : 'ALL DONE. CONFIRM ORDER'}
+            </Text>
+          </View>
+        )}
 
         <View style={styles.dashboardItem}>
-          <Text style={[styles.dashboardItemContentFreeFlow, styles.price]}>
-            {dataOrderItems.length}
+          <Text style={[styles.dashboardItemTitleFreeFlow, styles.price]}>
+            {checked}
           </Text>
           <Text style={styles.dashboardItemTitleFreeFlow}> items. </Text>
-          <Text style={styles.dashboardItemTitleFreeFlow}>
-            {/* Total price: {'\u20B9 '} */}
-            Total price:{' '}
-          </Text>
-          <Text style={[styles.dashboardItemContentFreeFlow, styles.price]}>
+          <Text style={styles.dashboardItemTitleFreeFlow}>Total price: </Text>
+          <Text style={[styles.dashboardItemTitleFreeFlow, styles.price]}>
             {total ? (
               <>
                 <Icon
@@ -587,7 +616,7 @@ const OrderItemsComponent = ({
                 {total}
               </>
             ) : (
-              'waiting'
+              'Waiting..'
             )}
           </Text>
         </View>
@@ -612,7 +641,7 @@ const OrderItemsComponent = ({
         setModalVisibleViewItem={setModalVisibleViewItem}
         item={currentItem}
         orderId={orderId}
-        currentCodeNumber={currentCodeNumber}
+        orderItemId={currentItemId}
       />
       <AddItem
         modalVisibleAddItem={modalVisibleAddItem}

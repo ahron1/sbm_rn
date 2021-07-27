@@ -18,7 +18,7 @@ const getOrderItems = orderId => dispatch => {
       },
     })
     .then(res => {
-      console.log('in getordersitems >> ', res);
+      // console.log('in getordersitems >> ', res);
       dispatch({
         type: GET_ORDERITEMS_SUCCESS,
         // payload: dataOrders,

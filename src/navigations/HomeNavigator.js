@@ -39,7 +39,7 @@ const HomeNavigator = ({navigation}) => {
           />
         ),
       }}
-      initialRouteName={PROFILE}>
+      initialRouteName={ALLORDERS}>
       <HomeStack.Screen name={ALLORDERS} component={AllOrders} />
       <HomeStack.Screen name={ORDERITEMS} component={OrderItems} />
       <HomeStack.Screen name={PROFILE} component={Profile} />

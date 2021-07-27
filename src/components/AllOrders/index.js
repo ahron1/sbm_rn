@@ -17,14 +17,12 @@ import styles from './styles';
 import colors from '../../assets/theme/colors';
 import getOrderStatus, {
   AllOrdersStatusIcon,
-  allOrdersStatusIcon,
   getCurrentCodeNumber,
 } from '../../helpers/orderStatus';
 import getDateTime from '../../helpers/dateTimeString';
 import ListItemSeparatorComponentThick from '../common/ListItemSeparatorThick';
 import Icon from '../common/Icon';
 import LoadingView from '../LoadingView';
-import {color} from 'react-native-reanimated';
 
 const AllOrdersComponent = ({
   dataAllOrders,

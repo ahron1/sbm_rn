@@ -13,10 +13,34 @@ export default ScaledSheet.create({
     marginBottom: '5@s',
   },
   introText: {
-    fontSize: '18@s',
+    fontSize: '15@s',
+    fontStyle: 'italic',
   },
   introSection: {
     marginVertical: '5@s',
+  },
+  textBold: {
+    fontWeight: '700',
+    fontSize: '16@s',
+  },
+
+  priceSection: {
+    paddingVertical: '5@s',
+    flexDirection: 'row',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+  priceTitle: {
+    // flex: 1,
+  },
+  InrTitle: {
+    // flex: 1,
+  },
+  priceField: {
+    // flex: 1,
+    maxWidth: '100@s',
+    minWidth: '100@s',
+    // alignItems: 'flex-start',
   },
 
   orderItem: {
@@ -38,5 +62,4 @@ export default ScaledSheet.create({
     color: colors.color4_1,
     fontSize: '18@s',
   },
-
 });

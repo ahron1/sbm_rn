@@ -9,6 +9,11 @@ export default {
     error: null,
     loading: false,
   },
+  editOrderItem: {
+    // data: [],
+    error: null,
+    loading: false,
+  },
   deleteOrderItem: {
     // data: [],
     error: null,
