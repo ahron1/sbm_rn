@@ -21,10 +21,6 @@ const addCustomer =
       })
       .then(res => {
         console.log('in action add customer . got response >> ', res.data);
-        Alert.alert(
-          'Already added',
-          "This customer's contact details are already in the system.",
-        );
         dispatch({
           type: ADD_CUSTOMER_SUCCESS,
           payload: {
@@ -36,6 +32,11 @@ const addCustomer =
       })
       .catch(err => {
         console.log('in action add customer. fail.. error is >> ', err);
+        Alert.alert(
+          'Error',
+          "This customer's contact details are already in the system.\n\nIf there is a problem please contact us.",
+        );
+
         dispatch({
           type: ADD_CUSTOMER_FAIL,
           payload: err,

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Linking} from 'react-native';
 import AppModal from '../common/AppModal';
 // import CustomButton from '../common/CustomButton';
 import CustomButtonMedium from '../common/CustomButtonMedium';
@@ -46,6 +46,18 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
         setFormErrorsAddCustomer({});
         setFormAddCustomer({});
         setModalVisibleAddCustomer(false);
+        console.log(
+          'in add customer component. name is ',
+          formAddCustomer.customerName,
+        );
+        Linking.openURL(
+          'whatsapp://send?text=' +
+            'Hello, ' +
+            formAddCustomer.customerName +
+            " I want to refer my favorite local store to you and earn rewards. I am sharing the store's name and number \n\n" +
+            '&phone=91' +
+            formAddCustomer.customerNumber,
+        );
       });
     } else {
       console.log('New customer cannot add -errors');
@@ -104,7 +116,7 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
               error={formErrorsAddCustomer.customerName}
             />
             <AppTextInput
-              label="Customer WhatsApp Number:"
+              label="Customer's WhatsApp Number:"
               placeholder="9876543210"
               keyboardType="phone-pad"
               value={formAddCustomer.customerNumber || ''}
