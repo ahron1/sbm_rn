@@ -1,9 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
 import React, {useContext, useEffect} from 'react';
-import {Text, Pressable, View} from 'react-native';
 import StoresComponent from '../../components/Stores';
 import {GlobalContext} from '../../context/Provider';
-import {useFocusEffect} from '@react-navigation/native';
 import NavMenuComponent, {
   NavMenuPressable,
 } from '../../components/common/NavMenu';
@@ -56,19 +54,6 @@ const Stores = ({navigation}) => {
   } else {
     console.log('navigated from menu . order id is:>>  ', orderId);
   }
-
-  // useFocusEffect(
-  // React.useCallback(() => {
-  // Do something when the screen is focused
-  // return () => {
-  // Do something when the screen is unfocused
-  // reset parameter so that on navigating back to this screen,
-  // it will work like it had been navigated to from the menu, and not from send order.
-  // navigation.setParams({orderId: null});
-  // };
-  // }, []),
-  // );
-
   return (
     <StoresComponent
       storesLoading={storesState.getStores.loading}

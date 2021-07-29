@@ -9,6 +9,8 @@ import authReducer from './reducers/AuthReducer';
 import authInitialState from './initialStates/authInitialState';
 import storesReducer from './reducers/storesReducer';
 import storesInitialState from './initialStates/storesInitialState';
+import customersReducer from './reducers/customersReducer';
+import customersInitialState from './initialStates/customersInitialState';
 
 const GlobalContext = createContext({});
 
@@ -22,6 +24,10 @@ const GlobalProvider = ({children}) => {
     orderItemsInitialState,
   );
   const [authState, authDispatch] = useReducer(authReducer, authInitialState);
+  const [customersState, customersDispatch] = useReducer(
+    customersReducer,
+    customersInitialState,
+  );
   const [storesState, storesDispatch] = useReducer(
     storesReducer,
     storesInitialState,
@@ -42,6 +48,8 @@ const GlobalProvider = ({children}) => {
         authDispatch,
         storesState,
         storesDispatch,
+        customersState,
+        customersDispatch,
       }}>
       {children}
     </GlobalContext.Provider>

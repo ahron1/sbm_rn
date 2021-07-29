@@ -23,12 +23,14 @@ import getDateTime from '../../helpers/dateTimeString';
 import ListItemSeparatorComponentThick from '../common/ListItemSeparatorThick';
 import Icon from '../common/Icon';
 import LoadingView from '../LoadingView';
+import AddCustomer from '../AddCustomer';
 
 const AllOrdersComponent = ({
   dataAllOrders,
   loadingGetOrders,
   errorGetOrders,
 }) => {
+  const [modalVisibleAddCustomer, setModalVisibleAddCustomer] = useState(false);
   // console.log('in all orders component. dataallorders is:> ', dataAllOrders);
   const {ordersDispatch, ordersState, authState} = useContext(GlobalContext);
   const {navigate} = useNavigation();
@@ -238,7 +240,7 @@ const AllOrdersComponent = ({
         onPress={() => {
           console.log('in orders empty component. + button pressed');
           if (authState.latitude && authState.longitude) {
-            // addOrderPressed();
+            setModalVisibleAddCustomer(true);
           } else {
             Alert.alert(
               'Not logged in',
@@ -247,12 +249,17 @@ const AllOrdersComponent = ({
               [
                 {
                   text: 'OK',
-                  // onPress: () => navigate(PROFILE),
+                  onPress: () => navigate(PROFILE),
                 },
               ],
             );
           }
         }}
+      />
+
+      <AddCustomer
+        modalVisibleAddCustomer={modalVisibleAddCustomer}
+        setModalVisibleAddCustomer={setModalVisibleAddCustomer}
       />
     </>
   );

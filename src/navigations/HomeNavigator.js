@@ -7,6 +7,7 @@ import {
   PROFILE,
   STORES,
   ORDERSTATUS,
+  CUSTOMERS,
 } from '../constants/routeNames';
 
 import {createStackNavigator, HeaderBackButton} from '@react-navigation/stack';
@@ -20,6 +21,7 @@ import OrderStatus from '../screens/OrderStatus';
 
 import colors from '../assets/theme/colors';
 import {Button} from 'react-native';
+import Customers from '../screens/Customers';
 
 const HomeNavigator = ({navigation}) => {
   const HomeStack = createStackNavigator();
@@ -41,6 +43,7 @@ const HomeNavigator = ({navigation}) => {
       }}
       initialRouteName={ALLORDERS}>
       <HomeStack.Screen name={ALLORDERS} component={AllOrders} />
+      <HomeStack.Screen name={CUSTOMERS} component={Customers} />
       <HomeStack.Screen name={ORDERITEMS} component={OrderItems} />
       <HomeStack.Screen name={PROFILE} component={Profile} />
       <HomeStack.Screen name={OFFERS} component={Offers} />
