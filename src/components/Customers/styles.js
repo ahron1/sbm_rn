@@ -41,6 +41,7 @@ export default ScaledSheet.create({
     alignItems: 'center',
     padding: '8@s',
     borderRadius: 100,
+    borderWidth: 2,
     backgroundColor: colors.color1_4,
   },
   badge: {
@@ -61,7 +62,8 @@ export default ScaledSheet.create({
 
   dashboardItemTitle: {
     fontSize: '18@s',
-    color: colors.color2_4,
+    color: 'seashell',
+    // fontWeight: '700',
   },
 
   headerDashboardItemTitle: {
@@ -73,7 +75,7 @@ export default ScaledSheet.create({
   },
 
   dashboardItemContent: {
-    color: colors.color3_2,
+    color: colors.color1_2,
     fontWeight: '700',
     fontSize: '18@s',
   },

@@ -115,6 +115,7 @@ const AllOrdersComponent = ({
         onPress={() => {
           navigate(ORDERITEMS, {
             orderId,
+            customerName,
           });
         }}>
         <View
@@ -233,8 +234,6 @@ const AllOrdersComponent = ({
         buttonText="Add customer"
         iconType="feather"
         iconName="user-plus"
-        // loading={ordersState.addOrder.loading}
-        // disabled={ordersState.addOrder.loading}
         circleColor={colors.color3_4}
         iconColor={colors.color2_4}
         onPress={() => {

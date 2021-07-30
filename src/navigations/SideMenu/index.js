@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Linking,
 } from 'react-native';
 import Icon from '../../components/common/Icon';
 import styles from './styles';
@@ -58,6 +59,19 @@ const SideMenu = ({navigation}) => {
       name: 'Customers',
       onPress: () => {
         navigation.navigate(CUSTOMERS);
+      },
+    },
+
+    {
+      icon: <Icon type="material" name="support-agent" size={40} />,
+      name: 'Contact us',
+      onPress: () => {
+        Linking.openURL(
+          'whatsapp://send?text=' +
+            'Hello Storebhai team, I want to ask about ...' +
+            '&phone=91' +
+            '8883672999',
+        );
       },
     },
   ];

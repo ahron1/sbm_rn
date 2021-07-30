@@ -52,7 +52,7 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
         );
         Linking.openURL(
           'whatsapp://send?text=' +
-            'Hello, ' +
+            'Namaskar, ' +
             formAddCustomer.customerName +
             " I want to refer my favorite local store to you and earn rewards. I am sharing the store's name and number \n\n" +
             '&phone=91' +

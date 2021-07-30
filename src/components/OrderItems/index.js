@@ -34,6 +34,7 @@ import confirmPayment from '../../context/actions/confirmPayment';
 // const OrderItemsComponent = ({orderStatusDetails, dataOrderItems}) => {
 const OrderItemsComponent = ({
   orderId,
+  customerName,
   dataOrderItems,
   loadingGetOrderItems,
 }) => {
@@ -206,7 +207,6 @@ const OrderItemsComponent = ({
       case 'status_600_payment_made':
       case 'status_500_customer_received':
       case 'status_400_store_fulfilled':
-        console.log('in order items component. buttons func. status 500');
         buttons = (
           <View>
             <View>
@@ -216,6 +216,8 @@ const OrderItemsComponent = ({
                 iconName="inr"
                 iconColor={colors.color2_2_4}
                 circleColor={colors.color3_4}
+                loading={ordersState.confirmPayment.loading}
+                disabled={ordersState.confirmPayment.loading}
                 onPress={() => {
                   console.log(
                     'in order items component. payment confirm pressed. ',
@@ -228,7 +230,7 @@ const OrderItemsComponent = ({
                     );
                     Alert.alert(
                       'Confirm payment    ₹ ' + total,
-                      'Thank you for completing the order.' +
+                      'Did you receive the payment?' +
                         '\n\nAfter receiving payment from the customer, press OK to confirm.' +
                         '\n\nIf you have not yet received the payment, press Cancel',
                       [
@@ -287,34 +289,41 @@ const OrderItemsComponent = ({
                 iconName="shopping-bag-1"
                 circleColor={colors.color3_4}
                 iconColor={colors.color2_4}
+                disabled={ordersState.confirmFulfil.loading}
+                loading={ordersState.confirmFulfil.loading}
                 onPress={() => {
                   console.log(
                     'in order items component. order fulfilled pressed. ',
                   );
-                  confirmFulfil({
-                    orderId,
-                  })(ordersDispatch)(() => {
-                    console.log(
-                      'in order items components. confirmed order fulfillment. going back to all orders',
-                    );
-                    Alert.alert(
-                      'Order fulfillment',
-                      'Thank you for fulfilling the order.' +
-                        '\n\nAfter handing over the items to the customer, press OK to confirm.' +
-                        '\n\nIf you have not yet given the items to the customer, press Cancel',
-                      [
-                        {
-                          text: 'Cancel',
-                        },
-                        {
-                          text: 'OK',
-                          onPress: () => {
+
+                  Alert.alert(
+                    'Order fulfillment',
+                    'Did you hand over the items to the customer?.' +
+                      '\n\nAfter handing over the items to the customer, press Confirm.' +
+                      '\n\nIf you have not yet given the items to the customer, press Cancel.',
+                    [
+                      {
+                        text: 'Cancel',
+                      },
+                      {
+                        text: 'Confirm',
+                        onPress: () => {
+                          confirmFulfil({
+                            orderId,
+                          })(ordersDispatch)(() => {
+                            console.log(
+                              'in order items components. confirmed order fulfillment. going back to all orders',
+                            );
+                            Alert.alert(
+                              'Thank you',
+                              'Thank you for fulfilling the order. \n\nPlease confirm after receiving payment',
+                            );
                             navigate(ALLORDERS);
-                          },
+                          });
                         },
-                      ],
-                    );
-                  });
+                      },
+                    ],
+                  );
                 }}
               />
             </View>
@@ -351,30 +360,42 @@ const OrderItemsComponent = ({
                 iconName="check"
                 circleColor={colors.color3_4}
                 iconColor={colors.color2_4}
+                loading={ordersState.confirmOrder.loading}
+                disabled={ordersState.confirmOrder.loading}
                 onPress={() => {
                   console.log(
                     'in order items component. confirm order pressed. ',
                   );
-                  confirmOrder({
-                    orderId,
-                  })(ordersDispatch)(() => {
-                    console.log(
-                      'in order items components. successfully confirmed order . going back to all orders',
-                    );
-                    Alert.alert(
-                      'Order Confirmed',
-                      'Thank you for confirming the order.' +
-                        '\n\nPlease give the items to the customer as soon as possible.',
-                      [
-                        {
-                          text: 'OK',
-                          onPress: () => {
+
+                  Alert.alert(
+                    'Order Confirmation',
+                    'Did you confirm the prices and availability for all items?' +
+                      '\n\nAfter checking all the prices and availability, press OK. ' +
+                      '\n\nIf you have not yet checked all the items, press Cancel.',
+                    [
+                      {
+                        text: 'Cancel',
+                      },
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          confirmOrder({
+                            orderId,
+                          })(ordersDispatch)(() => {
                             navigate(ALLORDERS);
-                          },
+                            console.log(
+                              'in order items components. successfully confirmed order . going back to all orders',
+                            );
+                            Alert.alert(
+                              'Order confirmed',
+                              'Thank you for confirming the order.' +
+                                '\n\nPlease give the items to the customer as soon as possible.',
+                            );
+                          });
                         },
-                      ],
-                    );
-                  });
+                      },
+                    ],
+                  );
                 }}
               />
             </View>
@@ -521,6 +542,15 @@ const OrderItemsComponent = ({
               </Text>
             </View>
           )}
+          <View style={styles.dashboardItem}>
+            <Text style={[styles.dashboardItemTitle, {color: orderColorText}]}>
+              Customer:{' '}
+            </Text>
+            <Text
+              style={[styles.dashboardItemContent, {color: orderColorText}]}>
+              {customerName}
+            </Text>
+          </View>
           {orderComments && (
             <View style={styles.dashboardItem}>
               <Text
@@ -712,6 +742,7 @@ const OrderItemsComponent = ({
         item={currentItem}
         orderId={orderId}
         orderItemId={currentItemId}
+        currentCodeNumber={currentCodeNumber}
       />
       <AddItem
         modalVisibleAddItem={modalVisibleAddItem}

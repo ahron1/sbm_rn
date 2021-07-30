@@ -217,8 +217,8 @@ const StoreServicesForm = ({
               title="OK"
               onPress={onSubmitStoreServices}
               style={styles.buttonSection}
-              // loading={ordersState.payOrder.loading}
-              // disabled={ordersState.payOrder.loading}
+              loading={authState.storeServicesUpdate.loading}
+              disabled={authState.storeServicesUpdate.loading}
               backgroundColor={colors.color1_4}
             />
           </View>

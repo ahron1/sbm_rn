@@ -3,6 +3,7 @@ import {
   Alert,
   FlatList,
   Linking,
+  Pressable,
   Text,
   TouchableOpacity,
   View,
@@ -14,7 +15,6 @@ import LoadingView from '../LoadingView';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {PROFILE} from '../../constants/routeNames';
-import CustomButtonSmall from '../common/CustomButtonSmall';
 import ListItemSeparatorComponentThick from '../common/ListItemSeparatorThick';
 import AddCustomer from '../AddCustomer';
 import FloatingCenterButton from '../common/FloatingCenterButton';
@@ -35,17 +35,46 @@ const CustomersComponent = ({
     const customerName = item.customer_name;
     const customerNumber = item.customer_mobile_number;
     return (
-      <View>
-        <View style={[styles.listRow]}>
-          <Text style={[styles.rowItemContentBold]}> {customerName}</Text>
-        </View>
+      <Pressable
+        onPress={() => {
+          console.log('contact touched ', customerName);
+          Alert.alert(customerName, 'Number: ' + customerNumber, [
+            {
+              text: 'Cancel',
+            },
+            {
+              text: 'Call',
+              onPress: () => {
+                Linking.openURL(`tel:${customerNumber}`);
+              },
+            },
+            {
+              text: 'WhatsApp',
+              onPress: () => {
+                Linking.openURL(
+                  'whatsapp://send?text=' +
+                    'Namaskar, ' +
+                    customerName +
+                    '. I want to .... ' +
+                    '&phone=91' +
+                    customerNumber,
+                );
+              },
+            },
+          ]);
+        }}>
+        <View>
+          <View style={[styles.listRow]}>
+            <Text style={[styles.rowItemContentBold]}> {customerName}</Text>
+          </View>
 
-        <View style={styles.listRow}>
-          <View style={styles.rowItem}>
-            <Text style={[styles.rowItemTitleLong]}>{customerNumber} </Text>
+          <View style={styles.listRow}>
+            <View style={styles.rowItem}>
+              <Text style={[styles.rowItemTitleLong]}>{customerNumber} </Text>
+            </View>
           </View>
         </View>
-      </View>
+      </Pressable>
     );
   };
 
@@ -137,7 +166,7 @@ const CustomersComponent = ({
       {type: 'materialCommunity', name: 'trophy-award'},
       {type: 'materialCommunity', name: 'trophy-award'},
     ];
-    const rankNumber = rankNumbersArray.findIndex(x => x >= n);
+    const rankNumber = rankNumbersArray.findIndex(x => x > n);
     const ranksArray = [
       'Just Opened',
       'New Store',
@@ -151,7 +180,7 @@ const CustomersComponent = ({
     ];
     const storeRank = ranksArray[rankNumber];
     const nextRank = ranksArray[rankNumber + 1];
-    const nextNumber = rankNumbersArray[rankNumber + 1];
+    const nextNumber = rankNumbersArray[rankNumber]; // + 1];
     const badge = badgesArray[rankNumber];
     const badgeColor = badgeColorsArray[rankNumber];
     return {

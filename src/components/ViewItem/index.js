@@ -24,7 +24,9 @@ const ViewItem = ({
   modalVisibleViewItem,
   setModalVisibleViewItem,
   orderItemId,
+  currentCodeNumber: orderStatusCodeNumber,
 }) => {
+  const canDeleteItem = orderStatusCodeNumber > 500 ? false : true;
   const {orderItemsDispatch, orderItemsState} = useContext(GlobalContext);
   const {
     // order_item_id: orderItemId,
@@ -197,39 +199,31 @@ const ViewItem = ({
               </View>
             </View>
           </View>
-          <CustomButton
-            title="OK"
-            backgroundColor={colors.color4_3}
-            style={styles.buttonSection}
-            // loading={orderItemsState.deleteOrderItem.loading}
-            // disabled={orderItemsState.deleteOrderItem.loading}
-            onPress={() => {
-              onSubmitItemPrice();
-              // deleteOrderItem({orderItemId})(orderItemsDispatch)(() => {
-              //   console.log('deleted order item');
-              //   setModalVisibleViewItem(false);
-              // });
-            }}
-          />
+          {canDeleteItem && (
+            <CustomButton
+              title="OK"
+              backgroundColor={colors.color4_3}
+              style={styles.buttonSection}
+              loading={orderItemsState.editOrderItem.loading}
+              disabled={orderItemsState.editOrderItem.loading}
+              onPress={() => {
+                onSubmitItemPrice();
+              }}
+            />
+          )}
 
-          <CustomButtonSmall
-            title="Not Available"
-            backgroundColor={colors.color3_1}
-            style={styles.buttonSection}
-            // loading={orderItemsState.deleteOrderItem.loading}
-            // disabled={orderItemsState.deleteOrderItem.loading}
-            onPress={() => {
-              console.log(
-                'not available button pressed on item id:>> ',
-                orderItemId,
-              );
-              onSubmitNotAvailable();
-              // deleteOrderItem({orderItemId})(orderItemsDispatch)(() => {
-              //   console.log('deleted order item');
-              //   setModalVisibleViewItem(false);
-              // });
-            }}
-          />
+          {canDeleteItem && (
+            <CustomButtonSmall
+              title="Not Available"
+              backgroundColor={colors.color3_1}
+              style={styles.buttonSection}
+              loading={orderItemsState.editOrderItem.loading}
+              disabled={orderItemsState.editOrderItem.loading}
+              onPress={() => {
+                onSubmitNotAvailable();
+              }}
+            />
+          )}
         </View>
       }
     />
