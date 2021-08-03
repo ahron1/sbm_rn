@@ -3,9 +3,8 @@ import {
   ALLORDERS,
   OFFERS,
   ORDERITEMS,
-  REWARDS,
+  // REWARDS,
   PROFILE,
-  STORES,
   ORDERSTATUS,
   CUSTOMERS,
 } from '../constants/routeNames';
@@ -15,8 +14,7 @@ import OrderItems from '../screens/OrderItems';
 import AllOrders from '../screens/AllOrders';
 import Profile from '../screens/Profile';
 import Offers from '../screens/Offers';
-import Rewards from '../screens/Rewards';
-import Stores from '../screens/Stores';
+// import Rewards from '../screens/Rewards';
 import OrderStatus from '../screens/OrderStatus';
 
 import colors from '../assets/theme/colors';
@@ -47,8 +45,7 @@ const HomeNavigator = ({navigation}) => {
       <HomeStack.Screen name={ORDERITEMS} component={OrderItems} />
       <HomeStack.Screen name={PROFILE} component={Profile} />
       <HomeStack.Screen name={OFFERS} component={Offers} />
-      <HomeStack.Screen name={REWARDS} component={Rewards} />
-      <HomeStack.Screen name={STORES} component={Stores} />
+      {/* <HomeStack.Screen name={REWARDS} component={Rewards} /> */}
       <HomeStack.Screen name={ORDERSTATUS} component={OrderStatus} />
     </HomeStack.Navigator>
   );

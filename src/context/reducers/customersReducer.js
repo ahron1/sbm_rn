@@ -45,14 +45,14 @@ const customersReducer = (state, {type, payload}) => {
         },
       };
     case ADD_CUSTOMER_SUCCESS:
-      console.log(
-        'in customers reducer. add customer success. payload is ',
-        payload,
-        'name is ',
-        payload.customerName,
-        'number is ',
-        payload.customerNumber,
-      );
+      // console.log(
+      // 'in customers reducer. add customer success. payload is ',
+      // payload,
+      // 'name is ',
+      // payload.customerName,
+      // 'number is ',
+      // payload.customerNumber,
+      // );
       return {
         ...state,
         addCustomer: {

@@ -94,7 +94,7 @@ const StoreServicesForm = ({
       setFormErrorsRadius(prev => {
         return {...prev, radius: 'Required'};
       });
-      console.log('in store submit form, submit pressed. missing radius');
+      // console.log('in store submit form, submit pressed. missing radius');
       return;
     }
     const updatedRadius = Number(formRadius.radius);
@@ -102,10 +102,10 @@ const StoreServicesForm = ({
     let pickupService;
     if (deliveryRadioButtons[0].selected || deliveryRadioButtons[1].selected) {
       if (deliveryRadioButtons[0].selected) {
-        console.log('delivery yes');
+        // console.log('delivery yes');
         deliveryService = true;
       } else if (deliveryRadioButtons[1].selected) {
-        console.log('delivery no');
+        // console.log('delivery no');
         deliveryService = false;
       }
     } else {
@@ -114,27 +114,27 @@ const StoreServicesForm = ({
     }
     if (pickupRadioButtons[0].selected || pickupRadioButtons[1].selected) {
       if (pickupRadioButtons[0].selected) {
-        console.log('pickup yes');
+        // console.log('pickup yes');
         pickupService = true;
       } else if (pickupRadioButtons[1].selected) {
-        console.log('pickup no');
+        // console.log('pickup no');
         pickupService = false;
       }
     } else {
       Alert.alert('Pickup service', 'Choose yes or no for pickup service');
       return;
     }
-    console.log(
-      'in store submit form, submit pressed. ALL OK \n',
-      'delivery is: ',
-      deliveryService,
-      '\n',
-      'pickup is: ',
-      pickupService,
-      '\n',
-      'delivery radius is ',
-      updatedRadius,
-    );
+    // console.log(
+    // 'in store submit form, submit pressed. ALL OK \n',
+    // 'delivery is: ',
+    // deliveryService,
+    // '\n',
+    // 'pickup is: ',
+    // pickupService,
+    // '\n',
+    // 'delivery radius is ',
+    // updatedRadius,
+    // );
     storeServicesUpdate({deliveryService, pickupService, updatedRadius})(
       authDispatch,
     )(() => setModalVisibleStoreServices(false));
@@ -146,10 +146,10 @@ const StoreServicesForm = ({
       setModalVisible={setModalVisibleStoreServices}
       modalTitle={'Store services'}
       modalFooter={<></>}
-      onShow={() => console.log('modal shown')}
+      // onShow={() => console.log('modal shown')}
       // onDismiss={() => console.log('modal closed')}
       onModalClose={() => {
-        console.log('modal closed');
+        // console.log('modal closed');
         setFormErrorsRadius({});
         // setFormRadius()
       }}

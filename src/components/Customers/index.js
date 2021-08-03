@@ -1,13 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {
-  Alert,
-  FlatList,
-  Linking,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, FlatList, Linking, Pressable, Text, View} from 'react-native';
 import colors from '../../assets/theme/colors';
 import {GlobalContext} from '../../context/Provider';
 import CustomButtonMedium from '../common/CustomButtonMedium';
@@ -37,7 +29,7 @@ const CustomersComponent = ({
     return (
       <Pressable
         onPress={() => {
-          console.log('contact touched ', customerName);
+          // console.log('contact touched ', customerName);
           Alert.alert(customerName, 'Number: ' + customerNumber, [
             {
               text: 'Cancel',
@@ -55,9 +47,7 @@ const CustomersComponent = ({
                   'whatsapp://send?text=' +
                     'Namaskar, ' +
                     customerName +
-                    '. I want to .... ' +
-                    '&phone=91' +
-                    customerNumber,
+                    '. I want to update about .... ',
                 );
               },
             },
@@ -70,7 +60,7 @@ const CustomersComponent = ({
 
           <View style={styles.listRow}>
             <View style={styles.rowItem}>
-              <Text style={[styles.rowItemTitleLong]}>{customerNumber} </Text>
+              <Text style={[styles.rowItemContent]}>{customerNumber} </Text>
             </View>
           </View>
         </View>
@@ -91,7 +81,7 @@ const CustomersComponent = ({
             </Text>
             <Text style={styles.emptyListText}>
               We will promote and advertise your store to new customers after
-              you get orders and good review from your old customers.
+              you get good review from your old customers.
             </Text>
           </View>
         </View>
@@ -198,47 +188,49 @@ const CustomersComponent = ({
     } else if (!loadingGetCustomers) {
       customerView = (
         <>
-          <View style={styles.dashboardItem}>
-            <View style={styles.dashboardDesc}>
-              <View style={styles.dashboard}>
-                <View style={styles.dashboardItem}>
-                  <View>
-                    <Text style={styles.dashboardItemTitle}>You have </Text>
+          <View style={styles.dashboard}>
+            <View style={styles.dashboardItem}>
+              <View style={styles.dashboardDesc}>
+                <View style={styles.dashboard}>
+                  <View style={styles.dashboardItem}>
+                    <View>
+                      <Text style={styles.dashboardItemTitle}>You have </Text>
+                    </View>
+                    <View>
+                      <Text style={[styles.dashboardItemContent]}>
+                        {dataGetCustomers.length}
+                      </Text>
+                    </View>
+                    <View>
+                      <Text style={styles.dashboardItemTitle}> customers.</Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={[styles.dashboardItemContent]}>
-                      {dataGetCustomers.length}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text style={styles.dashboardItemTitle}> customers.</Text>
-                  </View>
-                </View>
-                <View style={styles.dashboardItem}>
-                  <View>
-                    <Text style={styles.dashboardItemTitle}>
-                      Current rank:{' '}
-                    </Text>
-                  </View>
-                  <View>
-                    <Text style={[styles.dashboardItemContent]}>
-                      {getStoreRank(dataGetCustomers.length).storeRank}
-                      {/* {getStoreRank(2)} */}
-                    </Text>
+                  <View style={styles.dashboardItem}>
+                    <View>
+                      <Text style={styles.dashboardItemTitle}>
+                        Current rank:{' '}
+                      </Text>
+                    </View>
+                    <View>
+                      <Text style={[styles.dashboardItemContent]}>
+                        {getStoreRank(dataGetCustomers.length).storeRank}
+                        {/* {getStoreRank(2)} */}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.dashboardIcon2}>
-              <View style={styles.badgeCircle}>
-                <Icon
-                  type={getStoreRank(dataGetCustomers.length).badge.type}
-                  name={getStoreRank(dataGetCustomers.length).badge.name}
-                  style={[
-                    styles.badge,
-                    {color: getStoreRank(dataGetCustomers.length).badgeColor},
-                  ]}
-                />
+              <View style={styles.dashboardIcon2}>
+                <View style={styles.badgeCircle}>
+                  <Icon
+                    type={getStoreRank(dataGetCustomers.length).badge.type}
+                    name={getStoreRank(dataGetCustomers.length).badge.name}
+                    style={[
+                      styles.badge,
+                      {color: getStoreRank(dataGetCustomers.length).badgeColor},
+                    ]}
+                  />
+                </View>
               </View>
             </View>
           </View>
@@ -255,12 +247,10 @@ const CustomersComponent = ({
             buttonText="New customer"
             iconType="feather"
             iconName="user-plus"
-            // loading={ordersState.addOrder.loading}
-            // disabled={ordersState.addOrder.loading}
             circleColor={colors.color3_4}
             iconColor={colors.color2_4}
             onPress={() => {
-              console.log('in orders empty component. + button pressed');
+              // console.log('in orders empty component. + button pressed');
               if (authState.latitude && authState.longitude) {
                 setModalVisibleAddCustomer(true);
               } else {

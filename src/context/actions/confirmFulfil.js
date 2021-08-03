@@ -8,7 +8,7 @@ import axiosInstance from '../../helpers/axiosInterceptor';
 export default ({orderId}) =>
   dispatch =>
   onSuccess => {
-    console.log('in confirmfulfil action >> ');
+    // console.log('in confirmfulfil action >> ');
     dispatch({
       type: CONFIRM_FULFIL_LOADING,
     });
@@ -18,7 +18,7 @@ export default ({orderId}) =>
         orderId: orderId,
       })
       .then(res => {
-        console.log('in confirmfulfil action got response >> ', res.data);
+        // console.log('in confirmfulfil action got response >> ', res.data);
         dispatch({
           type: CONFIRM_FULFIL_SUCCESS,
           // payload: dataOrders,
@@ -27,7 +27,7 @@ export default ({orderId}) =>
         onSuccess();
       })
       .catch(err => {
-        console.log('in confirm fulfil action error is >> ', err);
+        // console.log('in confirm fulfil action error is >> ', err);
         dispatch({
           type: CONFIRM_FULFIL_FAIL,
           // payload: dataOrders,

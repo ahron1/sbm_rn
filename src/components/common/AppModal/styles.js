@@ -25,14 +25,11 @@ export default ScaledSheet.create({
     color: colors.color3_2,
   },
   modalBody: {
-    // minHeight: '300@s',
+    minHeight: '250@s',
     // maxWidth: '85%',
     // alignItems: 'center',
     paddingHorizontal: 10,
     // paddingVertical: 10,
-  },
-  modalBodyText: {
-    fontSize: '26@s',
   },
   modalView: {
     // minHeight: '400@s',
@@ -53,46 +50,8 @@ export default ScaledSheet.create({
     overflow: 'scroll',
   },
 
-  scrollViewContentContainer: {
-    // alignSelf: 'center',
-    alignItems: 'center',
-    // alignContent: 'center',
-  },
-  button: {
-    borderRadius: '20@s',
-    padding: '10@s',
-    elevation: '2@s',
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: '15@s',
-    textAlign: 'center',
-  },
-  footer: {
-    justifyContent: 'space-evenly',
-    paddingVertical: '7@s',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  footerText: {
-    fontSize: '12@s',
-  },
-  footerSeparator: {
+  separator: {
     height: '2@s',
     backgroundColor: colors.grey,
-  },
-  footerItems: {
-    width: '100%',
-    padding: '10@s',
   },
 });

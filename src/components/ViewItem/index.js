@@ -1,16 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {
-  Modal,
-  Text,
-  Pressable,
-  View,
-  ScrollView,
-  Button,
-  Alert,
-} from 'react-native';
+import {Text, View} from 'react-native';
 import AppModal from '../common/AppModal';
 import CustomButtonSmall from '../common/CustomButtonSmall';
-import deleteOrderItem from '../../context/actions/deleteOrderItem';
 import {GlobalContext} from '../../context/Provider';
 import colors from '../../assets/theme/colors';
 import styles from './styles';
@@ -36,34 +27,15 @@ const ViewItem = ({
     available: orderItemAvailable,
   } = item;
 
-  // const [thisItemState] = orderItemsState.getOrderItems.data.filter(
-  // x => x.order_item_id === orderItemId,
-  // );
-  // const orderItemPrice = thisItemState.price;
-
   const [formPrice, setFormPrice] = useState(
     !orderItemPrice ? {price: '0'} : {price: orderItemPrice.toString()},
   );
-  // const [formPrice, setFormPrice] = useState({price: '000'});
 
   useEffect(() => {
     if (item) {
       setFormPrice({price: orderItemPrice ? orderItemPrice.toString() : '0'});
     }
   }, [item]);
-
-  // useEffect(() => {
-  // console.log('in view item useeffect. orderitemsstate is ', orderItemsState);
-  // if (orderItemId && orderItemsState.getOrderItems?.data?.length > 0) {
-  // const orderItemsData = orderItemsState.getOrderItems?.data;
-  // const [thisItemState] = orderItemsData.filter(
-  // x => x.order_item_id === orderItemId,
-  // );
-  // console.log('in view item form. item state is ', thisItemState);
-  // const orderItemPrice = thisItemState.price;
-  // setFormPrice({price: orderItemPrice ? orderItemPrice.toString() : ''});
-  // }
-  // }, [orderItemId, orderItemsState]);
 
   const [formErrorsPrice, setFormErrorsPrice] = useState({});
   const onChangePrice = ({value}) => {
@@ -84,22 +56,22 @@ const ViewItem = ({
       setFormErrorsPrice(prev => {
         return {...prev, price: 'Required'};
       });
-      console.log('in item details form. submit pressed. price missing');
+      // console.log('in item details form. submit pressed. price missing');
       return;
     }
 
     const price = formPrice.price;
     const availability = true;
 
-    console.log(
-      'in item details form. submit pressed on item id ',
-      orderItemId,
-      'price set to ',
-      price,
-      'availability is ',
-      availability,
-    );
-
+    // console.log(
+    // 'in item details form. submit pressed on item id ',
+    // orderItemId,
+    // 'price set to ',
+    // price,
+    // 'availability is ',
+    // availability,
+    // );
+    //
     editOrderItem({
       orderItemId: orderItemId,
       orderItemPrice: price,
@@ -111,14 +83,14 @@ const ViewItem = ({
     const price = '0';
     const availability = false;
 
-    console.log(
-      'in item details form. submit pressed on item id ',
-      orderItemId,
-      'price set to ',
-      price,
-      'availability is ',
-      availability,
-    );
+    // console.log(
+    // 'in item details form. submit pressed on item id ',
+    // orderItemId,
+    // 'price set to ',
+    // price,
+    // 'availability is ',
+    // availability,
+    // );
 
     editOrderItem({
       orderItemId: orderItemId,
@@ -133,9 +105,9 @@ const ViewItem = ({
       setModalVisible={setModalVisibleViewItem}
       modalTitle={'Item details'}
       modalFooter={<></>}
-      onShow={() => console.log('modal shown')}
+      // onShow={() => console.log('modal shown')}
       onModalClose={() => {
-        console.log('modal closed');
+        // console.log('modal closed');
       }}
       modalBody={
         <View>

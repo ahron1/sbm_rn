@@ -1,17 +1,8 @@
 import React, {useContext, useState} from 'react';
-import {
-  Modal,
-  Text,
-  Pressable,
-  View,
-  ScrollView,
-  Button,
-  Alert,
-} from 'react-native';
+import {View} from 'react-native';
 import AppModal from '../common/AppModal';
 import CustomButtonMedium from '../common/CustomButtonMedium';
 import AppTextInput from '../common/AppTextInput';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
 import userNameUpdate from '../../context/actions/auth/userNameUpdate';
 import {GlobalContext} from '../../context/Provider';
@@ -30,25 +21,13 @@ const NameForm = ({
   const [formErrorsAddName, setFormErrorsAddName] = useState({});
   const {authState, authDispatch} = useContext(GlobalContext);
 
-  // const storeCurrentName = async () => {
-  // console.log('A OK, will add new name');
-  // const name = formAddName.name;
-  // console.log(name);
-  // await AsyncStorage.setItem('@userName', name);
-  // setStoredName(name);
-  // AsyncStorage.getItem('@userName').then(value => {
-  // console.log('stored name was:>> ', value);
-  // });
-  // setModalVisibleAddName(false);
-  // };
-
   const storeCurrentName = () => {
     const userName = formAddName.name;
-    console.log(
-      'in name form. update name button touched :>> ',
-      userName,
-      firebaseUid,
-    );
+    // console.log(
+    // 'in name form. update name button touched :>> ',
+    // userName,
+    // firebaseUid,
+    // );
     userNameUpdate({userName, firebaseUid})(authDispatch)(() =>
       setModalVisibleAddName(false),
     );
@@ -66,7 +45,7 @@ const NameForm = ({
     ) {
       storeCurrentName();
     } else {
-      console.log('New name cannot add -errors');
+      // console.log('New name cannot add -errors');
     }
   };
 
@@ -92,10 +71,10 @@ const NameForm = ({
       setModalVisible={setModalVisibleAddName}
       modalTitle={'Store Name'}
       modalFooter={<></>}
-      onShow={() => console.log('modal shown')}
+      // onShow={() => console.log('modal shown')}
       // onDismiss={() => console.log('modal closed')}
       onModalClose={() => {
-        console.log('modal closed');
+        // console.log('modal closed');
         setFormErrorsAddName({});
         setFormAddName({});
       }}
@@ -116,24 +95,15 @@ const NameForm = ({
             />
           </View>
 
-          {/* <View style={styles.buttonSection}> */}
           <CustomButtonMedium
-            // primary
             style={styles.buttonSection}
             backgroundColor={colors.color1_4}
             title="OK"
             loading={authState.userNameUpdate.loading}
             disabled={authState.userNameUpdate.loading}
             onPress={onSubmitName}
-            //            onPress={() => {
-            //              console.log(
-            //                'add button pressed. add item to order id :>> ',
-            //                orderId,
-            //              );
-            //            }}
           />
         </View>
-        // </View>
       }
     />
   );

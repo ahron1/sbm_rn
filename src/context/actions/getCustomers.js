@@ -6,7 +6,7 @@ import {
 import axiosInstance from '../../helpers/axiosInterceptor';
 
 const getCustomers = () => dispatch => {
-  console.log('in getcustomers dispatch loading >> ');
+  // console.log('in getcustomers dispatch loading >> ');
   dispatch({
     type: GET_CUSTOMERS_LOADING,
   });
@@ -14,14 +14,14 @@ const getCustomers = () => dispatch => {
   axiosInstance
     .get('/get_store_customers')
     .then(res => {
-      console.log('in getcustomers. server response is >> ', res.data);
+      // console.log('in getcustomers. server response is >> ', res.data);
       dispatch({
         type: GET_CUSTOMERS_SUCCESS,
         payload: res.data,
       });
     })
     .catch(err => {
-      console.log('in getcustomers error is >> ', err);
+      // console.log('in getcustomers error is >> ', err);
       dispatch({
         type: GET_CUSTOMERS_FAIL,
         // payload: dataOrders,

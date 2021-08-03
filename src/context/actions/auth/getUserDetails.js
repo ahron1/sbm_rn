@@ -13,7 +13,7 @@ export default () => dispatch => {
   axiosInstance
     .get('/get_store_details')
     .then(res => {
-      console.log('in user_details action got response >> ', res.data);
+      // console.log('in user_details action got response >> ', res.data);
       dispatch({
         type: GET_USER_DETAILS_SUCCESS,
         // payload: dataOrders,

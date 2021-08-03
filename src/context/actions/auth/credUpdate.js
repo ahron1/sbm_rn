@@ -28,7 +28,7 @@ const credUpdate =
         fcmToken: fcmToken,
       })
       .then(res => {
-        console.log('in credupdate. got response >> ', res.data);
+        // console.log('in credupdate. got response >> ', res.data);
         dispatch({
           type: CRED_UPDATE_SUCCESS,
           payload: {
@@ -39,7 +39,7 @@ const credUpdate =
         });
       })
       .catch(err => {
-        console.log('in credupdate. error is >> ', err);
+        // console.log('in credupdate. error is >> ', err);
         dispatch({
           type: CRED_UPDATE_FAIL,
           payload: err,

@@ -68,8 +68,8 @@ const getOrderStatus = order => {
         }
       : status_300_store_checked === true
       ? {
-          orderStatusText: 'You will fulfil the order - delivery or pickup',
-          orderStatusNext: 'Customer will make payment after receiving',
+          orderStatusText: 'You checked and confirmed the order',
+          orderStatusNext: 'Fulfil the order - pick up or delivery',
           orderColorCode: colors.color4_4,
           orderStatusCode: 'status_300_store_checked',
         }

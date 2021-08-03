@@ -43,7 +43,7 @@ const AllOrders = ({navigation}) => {
   // const dataGetOrders = [];
 
   useEffect(() => {
-    console.log('navigating to  all orders screen.');
+    // console.log('navigating to  all orders screen.');
     const unsubscribe = navigation.addListener('focus', () => {
       getOrders()(ordersDispatch);
     });

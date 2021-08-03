@@ -44,7 +44,8 @@ const Profile = () => {
       setPhoneNumber(user.phoneNumber);
       user
         .getIdToken()
-        //this is the token that should be used for UID auth.
+        //this is the token that should actually be used for UID auth.
+        //App does not do this ^ rn, instead just the UID is checked.
         .then(token => console.log('in profile screen. users uid token is '));
       messaging()
         .getToken()
@@ -61,7 +62,7 @@ const Profile = () => {
   // Handle user state changes
   const onAuthStateChanged = user => {
     if (user) {
-      console.log('in profile screen. onauthstatechanged. ');
+      // console.log('in profile screen. onauthstatechanged. ');
       setAuthenticated(true);
     } else {
       setAuthenticated(false);
@@ -77,7 +78,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (fireBaseUid && phoneNumber && fcmToken) {
-      console.log('in profile screen. now calling credupdate');
+      // console.log('in profile screen. now calling credupdate');
       credUpdate({fireBaseUid, phoneNumber, fcmToken})(authDispatch);
     } else {
       // console.log('in profile screen. creds not yet ready to call credupdate');

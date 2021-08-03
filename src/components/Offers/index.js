@@ -42,7 +42,7 @@ const OffersComponent = () => {
           circleColor={colors.color3_4}
           iconColor={colors.color2_4}
           onPress={() => {
-            console.log('in orders empty component. + button pressed');
+            // console.log('in orders empty component. + button pressed');
             if (authState.latitude && authState.longitude) {
               setModalVisibleAddCustomer(true);
             } else {

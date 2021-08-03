@@ -14,9 +14,6 @@ export default ScaledSheet.create({
   loadingTextIndicator: {
     flexDirection: 'row',
   },
-  activityIndicator: {
-    paddingHorizontal: '15@s',
-  },
   button: {
     paddingHorizontal: '12@s',
     // backgroundColor: colors.color4_1_2,

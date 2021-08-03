@@ -30,12 +30,8 @@ export default ScaledSheet.create({
     alignContent: 'center',
     alignItems: 'center',
   },
-  priceTitle: {
-    // flex: 1,
-  },
-  InrTitle: {
-    // flex: 1,
-  },
+  priceTitle: {},
+  InrTitle: {},
   priceField: {
     // flex: 1,
     maxWidth: '100@s',

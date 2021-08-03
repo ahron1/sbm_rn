@@ -1,10 +1,8 @@
 import React, {useContext, useState} from 'react';
 import {View, Text, Linking} from 'react-native';
 import AppModal from '../common/AppModal';
-// import CustomButton from '../common/CustomButton';
 import CustomButtonMedium from '../common/CustomButtonMedium';
 import AppTextInput from '../common/AppTextInput';
-import addOrderItem from '../../context/actions/addOrderItem';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import colors from '../../assets/theme/colors';
@@ -34,11 +32,11 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
       Object.values(formAddCustomer).length >= 2 &&
       Object.values(formAddCustomer).every(x => x.trim().length > 0)
     ) {
-      console.log(
-        'A OK, will add new customer',
-        formAddCustomer.customerName,
-        formAddCustomer.customerNumber,
-      );
+      // console.log(
+      // 'A OK, will add new customer',
+      // formAddCustomer.customerName,
+      // formAddCustomer.customerNumber,
+      // );
       addCustomer({
         customerName: formAddCustomer.customerName,
         customerNumber: formAddCustomer.customerNumber,
@@ -46,21 +44,22 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
         setFormErrorsAddCustomer({});
         setFormAddCustomer({});
         setModalVisibleAddCustomer(false);
-        console.log(
-          'in add customer component. name is ',
-          formAddCustomer.customerName,
-        );
+        // console.log(
+        // 'in add customer component. name is ',
+        // formAddCustomer.customerName,
+        // );
         Linking.openURL(
           'whatsapp://send?text=' +
             'Namaskar, ' +
             formAddCustomer.customerName +
-            " I want to refer my favorite local store to you and earn rewards. I am sharing the store's name and number \n\n" +
-            '&phone=91' +
-            formAddCustomer.customerNumber,
+            '.\n\n We just made an account for our store on the Storebhai app. It makes it very easy to order from our store. ' +
+            'So please use the Storebhai app and send us your order. It will be a great experience. \n\n' +
+            'Please install the app from this link now: \n' +
+            'http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ',
         );
       });
     } else {
-      console.log('New customer cannot add -errors');
+      // console.log('New customer cannot add -errors');
     }
   };
 
@@ -86,10 +85,10 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
       setModalVisible={setModalVisibleAddCustomer}
       modalTitle={'New customer'}
       modalFooter={<></>}
-      onShow={() => console.log('modal shown')}
+      // onShow={() => console.log('modal shown')}
       // onDismiss={() => console.log('modal closed')}
       onModalClose={() => {
-        console.log('modal closed');
+        // console.log('modal closed');
         setFormErrorsAddCustomer({});
         setFormAddCustomer({});
       }}
@@ -120,7 +119,7 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
               placeholder="9876543210"
               keyboardType="phone-pad"
               value={formAddCustomer.customerNumber || ''}
-              maxLength={10}
+              maxLength={15}
               onChangeText={value => {
                 onChangeAddCustomer({
                   name: 'customerNumber',

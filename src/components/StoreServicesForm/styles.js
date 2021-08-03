@@ -35,21 +35,11 @@ export default ScaledSheet.create({
   radiusTitle: {
     flex: 3,
   },
-  rowItemTitle: {
-    fontSize: '16@s',
-    flex: 2,
-    fontWeight: '700',
-    // flexWrap: 'wrap',
-  },
   introContent: {
     fontSize: '16@s',
   },
   serviceSection: {
     paddingVertical: '10@s',
-  },
-  textSection: {
-    // marginVertical: '5@s',
-    // flexDirection: 'row',
   },
   text: {
     // fontWeight: '700',
@@ -60,17 +50,8 @@ export default ScaledSheet.create({
     fontSize: '16@s',
   },
 
-  introText: {
-    fontSize: '18@s',
-  },
   introSection: {
     marginVertical: '10@s',
     // flexDirection: 'row',
-  },
-  price: {
-    color: colors.color4_1,
-    fontSize: '18@s',
-    fontFamily: 'Tillana-SemiBold',
-    // fontWeight: '700',
   },
 });

@@ -13,15 +13,15 @@ const editOrderItem =
   }) =>
   dispatch =>
   onSuccess => {
-    console.log(
-      'in editordersitems dispatch loading >> ',
-      'order item id is: ',
-      orderItemId,
-      'order item price is ',
-      orderItemPrice,
-      'available is ',
-      orderItemAvailable,
-    );
+    // console.log(
+    // 'in editordersitems dispatch loading >> ',
+    // 'order item id is: ',
+    // orderItemId,
+    // 'order item price is ',
+    // orderItemPrice,
+    // 'available is ',
+    // orderItemAvailable,
+    // );
     dispatch({
       type: EDIT_ORDERITEM_LOADING,
     });
@@ -33,7 +33,7 @@ const editOrderItem =
         orderItemAvailable: orderItemAvailable,
       })
       .then(res => {
-        console.log('in editordersitems. received response data >> ', res.data);
+        // console.log('in editordersitems. received response data >> ', res.data);
         dispatch({
           type: EDIT_ORDERITEM_SUCCESS,
           payload: res.data,
@@ -46,7 +46,7 @@ const editOrderItem =
         onSuccess();
       })
       .catch(err => {
-        console.log('in editorderitems error is >> ', err);
+        // console.log('in editorderitems error is >> ', err);
         dispatch({
           type: EDIT_ORDERITEM_FAIL,
           // payload: dataOrders,

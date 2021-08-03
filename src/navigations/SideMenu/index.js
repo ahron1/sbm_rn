@@ -14,7 +14,7 @@ import styles from './styles';
 import {
   ALLORDERS,
   OFFERS,
-  REWARDS,
+  // REWARDS,
   PROFILE,
   CUSTOMERS,
 } from '../../constants/routeNames';

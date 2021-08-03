@@ -12,19 +12,18 @@ const OrderItems = ({navigation}) => {
   // const {params: {orderId = {}} = {}} = useRoute();
   const route = useRoute();
   // const orderStatusDetails = route.params;
-  // const {orderId} = orderStatusDetails;
   const orderId = route.params.orderId;
-  console.log('in order items screen. order id is:>> ', orderId);
+  // console.log('in order items screen. order id is:>> ', orderId);
   const customerName = route.params.customerName;
-  console.log('in order items screen. customerName is:>> ', customerName);
+  // console.log('in order items screen. customerName is:>> ', customerName);
 
   const {setOptions, toggleDrawer} = useNavigation();
   const {orderItemsDispatch, orderItemsState} = useContext(GlobalContext);
 
-  console.log(
-    'in order items screen. orderitems statte is>> ',
-    orderItemsState,
-  );
+  // console.log(
+  // 'in order items screen. orderitems statte is>> ',
+  // orderItemsState,
+  // );
   const {
     data: dataGetOrderItems,
     loading: loadingGetOrderItems,
@@ -66,7 +65,6 @@ const OrderItems = ({navigation}) => {
 
   return (
     <OrderItemsComponent
-      // orderStatusDetails={orderStatusDetails}
       orderId={orderId}
       customerName={customerName}
       dataOrderItems={dataGetOrderItems}

@@ -32,7 +32,7 @@ const AllOrdersComponent = ({
 }) => {
   const [modalVisibleAddCustomer, setModalVisibleAddCustomer] = useState(false);
   // console.log('in all orders component. dataallorders is:> ', dataAllOrders);
-  const {ordersDispatch, ordersState, authState} = useContext(GlobalContext);
+  const {authState} = useContext(GlobalContext);
   const {navigate} = useNavigation();
   // console.log('in all orders. auth state is: ', authState);
 
@@ -62,16 +62,18 @@ const AllOrdersComponent = ({
     return (
       <View style={styles.dashboard}>
         <View style={styles.dashboardItem}>
-          <Text style={styles.dashboardItemTitleFreeFlow}>
-            You have a total of {dataAllOrders.length} orders.
-          </Text>
+          <View style={styles.dashboardItemGroup}>
+            <Text style={styles.dashboardItemTitle}>
+              You have a total of {dataAllOrders.length} orders.
+            </Text>
+          </View>
           <>
             {dataAllOrders.length > 0 ? (
-              <Text style={styles.dashboardItemTitleFreeFlow}>
-                Touch an order to view its details and take action.
+              <Text style={styles.dashboardItemTitleItalic}>
+                Touch any order to view its details and take action.
               </Text>
             ) : (
-              <Text style={styles.dashboardItemTitleFreeFlow}>
+              <Text style={styles.dashboardItemTitle}>
                 Add some customers first.
               </Text>
             )}
@@ -237,7 +239,7 @@ const AllOrdersComponent = ({
         circleColor={colors.color3_4}
         iconColor={colors.color2_4}
         onPress={() => {
-          console.log('in orders empty component. + button pressed');
+          // console.log('in orders empty component. + button pressed');
           if (authState.latitude && authState.longitude) {
             setModalVisibleAddCustomer(true);
           } else {

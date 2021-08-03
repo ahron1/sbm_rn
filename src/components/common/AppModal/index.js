@@ -1,8 +1,6 @@
 import React from 'react';
 import {Modal, Text, Pressable, View, ScrollView} from 'react-native';
 import Icon from '../Icon';
-// import {Text, Pressable, View, ScrollView} from 'react-native';
-// import Modal from 'react-native-modal';
 import styles from './styles';
 
 const AppModal = ({
@@ -15,7 +13,6 @@ const AppModal = ({
   modalFooter,
   onModalClose,
 }) => {
-  // const [modalVisible, setModalVisible] = useState(false);
   // const deviceWidth = Dimensions.get('window').width;
   return (
     // <View style={styles.centeredView}>
@@ -23,14 +20,14 @@ const AppModal = ({
     <Modal
       animationType="slide"
       transparent={true}
-      onBackdropPress={() => console.log('backdrop pressed')}
+      // onBackdropPress={() => console.log('backdrop pressed')}
       visible={modalVisible}
       // onDismiss={onDismiss}
       onDismiss={onModalClose}
       onShow={onShow}
       // onModalClose={onModalClose}
       onRequestClose={() => {
-        console.log('modal hidden by back button press');
+        // console.log('modal hidden by back button press');
         onModalClose();
         setModalVisible(false);
       }}>
@@ -40,9 +37,8 @@ const AppModal = ({
         pressRetentionOffset={100}
         onPress={() => {
           // setModalVisible(!modalVisible);
-          console.log('modal touched');
+          // console.log('modal touched');
         }}>
-        {/* <View style={styles.modalView}> */}
         <ScrollView style={styles.modalView} keyboardShouldPersistTaps="always">
           <View style={styles.header}>
             {/* <Icon type="evil" name="close" /> */}
@@ -51,7 +47,7 @@ const AppModal = ({
             <Text style={styles.title}>{modalTitle || 'Storebhai'} </Text>
             <Pressable
               onPress={() => {
-                console.log('modal X touched');
+                // console.log('modal X touched');
                 onModalClose();
                 setModalVisible(!modalVisible);
               }}>
@@ -64,7 +60,7 @@ const AppModal = ({
             </Pressable>
           </View>
 
-          <View style={styles.footerSeparator} />
+          <View style={styles.separator} />
           <View style={styles.modalBody}>{modalBody}</View>
 
           {modalFooter}

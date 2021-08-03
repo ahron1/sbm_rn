@@ -21,9 +21,6 @@ const AddressForm = ({
   setLoadingEditAddressWrapper,
   // setStoredAddress,
 }) => {
-  const [formAddAddress, setFormAddAddress] = useState({});
-  const [formErrorsAddAddress, setFormErrorsAddAddress] = useState({});
-  const [submitIntent, setSubmitIntent] = useState(false);
   const {authState, authDispatch} = useContext(GlobalContext);
   const {
     geoPincode,
@@ -55,7 +52,7 @@ const AddressForm = ({
 
   // console.log('in address form. returned address line 2', geoAddressLine2);
   const submitFormik = async values => {
-    console.log('formik submitted. values are:>> ', values);
+    // console.log('formik submitted. values are:>> ', values);
     const userAddress = values;
     const geoAccuracy = systemLocation.accuracy;
     const systemCoordinates = {
@@ -74,10 +71,10 @@ const AddressForm = ({
       values.state
     ).replace('\n', ' ');
 
-    console.log(
-      'in address form useeffect to submit. total address string is:>>  ',
-      addressString,
-    );
+    // console.log(
+    // 'in address form useeffect to submit. total address string is:>>  ',
+    // addressString,
+    // );
     Geocoder.from(addressString)
       .then(json => {
         // const userCoordinates = json.results[0].geometry.location;
@@ -85,16 +82,16 @@ const AddressForm = ({
           latitude: json.results[0].geometry.location.lat,
           longitude: json.results[0].geometry.location.lng,
         };
-        console.log(
-          ' will now update server. coordinates of address, ',
-          addressString,
-          ' are: ',
-          userCoordinates,
-        );
-        console.log(
-          'will update server. user address being submitted is >>> ',
-          userAddress,
-        );
+        // console.log(
+        // ' will now update server. coordinates of address, ',
+        // addressString,
+        // ' are: ',
+        // userCoordinates,
+        // );
+        // console.log(
+        // 'will update server. user address being submitted is >>> ',
+        // userAddress,
+        // );
         userAddressUpdate({userAddress, userCoordinates, geoAccuracy})(
           authDispatch,
         )(() => {
@@ -103,7 +100,7 @@ const AddressForm = ({
         });
       })
       .catch(error => {
-        console.warn(error);
+        // console.warn(error);
         //error will also be thrown if quota is exceeded. That situation is handled.
         Alert.alert(
           'Check',
@@ -137,12 +134,10 @@ const AddressForm = ({
       setModalVisible={setModalVisibleAddAddress}
       modalTitle={'Update Address'}
       modalFooter={<></>}
-      onShow={() => console.log('modal shown')}
+      // onShow={() => console.log('modal shown')}
       // onDismiss={() => console.log('modal closed')}
       onModalClose={() => {
-        console.log('modal closed');
-        setFormErrorsAddAddress({});
-        setFormAddAddress({});
+        // console.log('modal closed');
         setLoadingEditAddressWrapper(false);
       }}
       modalBody={

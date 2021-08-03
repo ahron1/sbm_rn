@@ -32,7 +32,7 @@ const Customers = ({navigation}) => {
   }, [setOptions, toggleDrawer]);
 
   useEffect(() => {
-    console.log('navigating to  all orders screen.');
+    // console.log('navigating to  all orders screen.');
     const unsubscribe = navigation.addListener('focus', () => {
       getCustomers()(customersDispatch);
     });

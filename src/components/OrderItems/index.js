@@ -1,19 +1,8 @@
 import React, {useContext} from 'react';
 import {useState, useEffect} from 'react';
-import {
-  Alert,
-  Button,
-  FlatList,
-  Linking,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, FlatList, Linking, Pressable, Text, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import ViewItem from '../ViewItem';
-import AddItem from '../AddItem';
-import FloatingLeftButton from '../common/FloatingLeftButton';
 import FloatingRightButton from '../common/FloatingRightButton';
 import FloatingCenterButton from '../common/FloatingCenterButton';
 import ListFooterComponent from '../common/ListFooter';
@@ -42,28 +31,16 @@ const OrderItemsComponent = ({
   const [currentItem, setCurrentItem] = useState({});
   const [currentItemId, setCurrentItemId] = useState(null);
   const [modalVisibleViewItem, setModalVisibleViewItem] = useState(false);
-  const [modalVisibleAddItem, setModalVisibleAddItem] = useState(false);
   const {navigate} = useNavigation();
-
-  // const {
-  // orderId,
-  // orderCreatedDateTime,
-  // orderStatusText,
-  // orderStatusNext,
-  // orderColorCode,
-  // orderStatusCode,
-  // } = orderStatusDetails;
-  //
-
   const [order] = ordersState.getOrders.data.filter(
     x => x.order_id === orderId,
   );
 
-  console.log(
-    'in orderitems component. orders state is:>> ',
-    // ordersState.getOrders.data.filter(x => x.order_id === orderId),
-    order,
-  );
+  // console.log(
+  // 'in orderitems component. orders state is:>> ',
+  // ordersState.getOrders.data.filter(x => x.order_id === orderId),
+  // order,
+  // );
 
   const {
     time_100_created,
@@ -86,12 +63,12 @@ const OrderItemsComponent = ({
   } = order ? getOrderStatus(order) : {};
 
   const currentCodeNumber = Number(orderStatusCode.substr(7, 3));
-  console.log(
-    'in order items. order status code is :> ',
-    orderStatusCode,
-    'number is ',
-    currentCodeNumber,
-  );
+  // console.log(
+  // 'in order items. order status code is :> ',
+  // orderStatusCode,
+  // 'number is ',
+  // currentCodeNumber,
+  // );
   // the conditional assignment is to take care of deletion where the order item details are no longer found after deletion
 
   let total;
@@ -121,16 +98,18 @@ const OrderItemsComponent = ({
     });
   };
 
+  // move to helper func. asap.
   const OrderItemsButtons = () => {
-    console.log(
-      'in order items component. orderstatuscode is:>> ',
-      orderStatusCode,
-      orderStatusText,
-    );
+    // console.log(
+    // 'in order items component. orderstatuscode is:>> ',
+    // orderStatusCode,
+    // orderStatusText,
+    // );
     var buttons;
     switch (orderStatusCode) {
       case 'status_900_order_complete':
-        console.log('in order items component. buttons func. status 500');
+      case 'status_700_payment_received':
+        // console.log('in order items component. buttons func. status 500');
         buttons = (
           <View>
             <View>
@@ -155,55 +134,6 @@ const OrderItemsComponent = ({
         );
         break;
 
-      case 'status_700_payment_received':
-        console.log('in order items component. buttons func. status 500');
-        buttons = (
-          <View>
-            <View>
-              <FloatingCenterButton
-                buttonText="Earn rewards"
-                iconType="entypo"
-                iconName="trophy"
-                circleColor={colors.color3_3}
-                iconColor={colors.color2_4}
-                onPress={() => {
-                  Linking.openURL(
-                    'whatsapp://send?text=' +
-                      'Hello Storebhai team, I completed an order on the app.' +
-                      ' I want to ask about the rewards program.' +
-                      '&phone=91' +
-                      '8883672999',
-                  );
-                }}
-              />
-            </View>
-          </View>
-        );
-        break;
-
-      /*
-      case 'status_600_payment_made':
-        console.log('in order items component. buttons func. status 500');
-        buttons = (
-          <View>
-            <View>
-              <FloatingCenterButton
-                buttonText="Check status"
-                iconType="ant"
-                iconName="questioncircle"
-                circleColor={colors.color4_2}
-                iconColor={colors.color2_4}
-                onPress={() => {
-                  console.log('in order items component. check status pressed');
-                  navigateOrderStatus();
-                }}
-              />
-            </View>
-          </View>
-        );
-        break;
-        */
-
       case 'status_600_payment_made':
       case 'status_500_customer_received':
       case 'status_400_store_fulfilled':
@@ -219,15 +149,12 @@ const OrderItemsComponent = ({
                 loading={ordersState.confirmPayment.loading}
                 disabled={ordersState.confirmPayment.loading}
                 onPress={() => {
-                  console.log(
-                    'in order items component. payment confirm pressed. ',
-                  );
                   confirmPayment({
                     orderId,
                   })(ordersDispatch)(() => {
-                    console.log(
-                      'in order items components. payment confirmed . going back to all orders',
-                    );
+                    // console.log(
+                    // 'in order items components. payment confirmed . going back to all orders',
+                    // );
                     Alert.alert(
                       'Confirm payment    ₹ ' + total,
                       'Did you receive the payment?' +
@@ -253,32 +180,6 @@ const OrderItemsComponent = ({
           </View>
         );
         break;
-
-      /*
-      case 'status_400_store_fulfilled':
-      case 'status_300_store_checked':
-        buttons = (
-          <View>
-            <View>
-              <FloatingCenterButton
-                buttonText="Received items"
-                iconType="fa5"
-                iconName="check-circle"
-                circleColor={colors.color4_2}
-                iconColor={colors.color2_4}
-                onPress={() => {
-                  console.log(
-                    'in order items component. order received pressed',
-                  );
-                  setModalVisibleReceivedOrder(true);
-                }}
-              />
-            </View>
-          </View>
-        );
-        break;
-        */
-
       case 'status_300_store_checked':
         buttons = (
           <View>
@@ -292,9 +193,9 @@ const OrderItemsComponent = ({
                 disabled={ordersState.confirmFulfil.loading}
                 loading={ordersState.confirmFulfil.loading}
                 onPress={() => {
-                  console.log(
-                    'in order items component. order fulfilled pressed. ',
-                  );
+                  // console.log(
+                  // 'in order items component. order fulfilled pressed. ',
+                  // );
 
                   Alert.alert(
                     'Order fulfillment',
@@ -311,9 +212,9 @@ const OrderItemsComponent = ({
                           confirmFulfil({
                             orderId,
                           })(ordersDispatch)(() => {
-                            console.log(
-                              'in order items components. confirmed order fulfillment. going back to all orders',
-                            );
+                            // console.log(
+                            // 'in order items components. confirmed order fulfillment. going back to all orders',
+                            // );
                             Alert.alert(
                               'Thank you',
                               'Thank you for fulfilling the order. \n\nPlease confirm after receiving payment',
@@ -342,10 +243,10 @@ const OrderItemsComponent = ({
                 iconColor={colors.color2_4}
                 circleColor={colors.color4_2}
                 onPress={() => {
-                  console.log(
-                    'in order items component. check status pressed. order status code is:>> ',
-                    orderStatusCode,
-                  );
+                  // console.log(
+                  // 'in order items component. check status pressed. order status code is:>> ',
+                  // orderStatusCode,
+                  // );
                   navigateOrderStatus();
                 }}
               />
@@ -363,9 +264,9 @@ const OrderItemsComponent = ({
                 loading={ordersState.confirmOrder.loading}
                 disabled={ordersState.confirmOrder.loading}
                 onPress={() => {
-                  console.log(
-                    'in order items component. confirm order pressed. ',
-                  );
+                  // console.log(
+                  // 'in order items component. confirm order pressed. ',
+                  // );
 
                   Alert.alert(
                     'Order Confirmation',
@@ -383,9 +284,9 @@ const OrderItemsComponent = ({
                             orderId,
                           })(ordersDispatch)(() => {
                             navigate(ALLORDERS);
-                            console.log(
-                              'in order items components. successfully confirmed order . going back to all orders',
-                            );
+                            // console.log(
+                            // 'in order items components. successfully confirmed order . going back to all orders',
+                            // );
                             Alert.alert(
                               'Order confirmed',
                               'Thank you for confirming the order.' +
@@ -403,84 +304,28 @@ const OrderItemsComponent = ({
         );
         break;
 
-      // IMP - the default case is called on newly created orders.
-      // default case is same as for status_100_customer_started
-      // .. compare the navigate(ORDERITEMS) func in addOrderPressed with the
-      // .. onPress function in the renderItem pressable in AllOrdersComponent
-      // todo - this is very hackish. fix it so new orders get the right status.
       default:
-        console.log('in order items component. buttons func. status default');
-        if (dataOrderItems.length > 0) {
-          buttons = (
+        // console.log('in order items component. buttons func. status default');
+        buttons = (
+          <View>
             <View>
-              <View>
-                <FloatingRightButton
-                  buttonText="Send order"
-                  iconType="fontAwesome"
-                  iconName="send"
-                  circleColor={colors.color4_3}
-                  // iconColor={colors.color1_2}
-                  iconColor={colors.color2_4}
-                  onPress={() => {
-                    console.log(
-                      'in order items component send button. order id is:>> ',
-                      orderId,
-                    );
-                    navigate(STORES, {orderId: orderId});
-                  }}
-                />
-                <FloatingLeftButton
-                  buttonText="Add item"
-                  iconType="materialCommunity"
-                  // iconName="cart-arrow-down"
-                  iconName="cart-plus"
-                  circleColor={colors.color2_2_4}
-                  iconColor={colors.color1_3}
-                  onPress={() => {
-                    console.log('in order items component. + pressed');
-                    setModalVisibleAddItem(true);
-                  }}
-                />
-              </View>
+              <FloatingCenterButton
+                buttonText="Check status"
+                iconType="ant"
+                iconName="questioncircle"
+                iconColor={colors.color2_4}
+                circleColor={colors.color4_2}
+                onPress={() => {
+                  // console.log(
+                  // 'in order items component. check status pressed. order status code is:>> ',
+                  // orderStatusCode,
+                  // );
+                  navigateOrderStatus();
+                }}
+              />
             </View>
-          );
-        } else {
-          buttons = (
-            <View>
-              <View>
-                <FloatingRightButton
-                  buttonText="Delete order"
-                  iconType="materialCommunity"
-                  // iconName="cart-off"
-                  iconName="playlist-remove"
-                  circleColor={colors.color3_2}
-                  iconColor={colors.color2_3}
-                  loading={ordersState.deleteOrder.loading}
-                  disabled={ordersState.deleteOrder.loading}
-                  onPress={() => {
-                    console.log('in order items component. delete pressed');
-                    deleteOrder({orderId})(ordersDispatch)(() => {
-                      console.log('in order items components. deleted order');
-                      navigate(ALLORDERS);
-                    });
-                  }}
-                />
-                <FloatingLeftButton
-                  buttonText="Add item"
-                  iconType="materialCommunity"
-                  // iconName="cart-arrow-down"
-                  iconName="cart-plus"
-                  circleColor={colors.color2_2_4}
-                  iconColor={colors.color1_3}
-                  onPress={() => {
-                    console.log('in order items component. + pressed');
-                    setModalVisibleAddItem(true);
-                  }}
-                />
-              </View>
-            </View>
-          );
-        }
+          </View>
+        );
     }
 
     return buttons;
@@ -602,11 +447,11 @@ const OrderItemsComponent = ({
 
   //TODO / TOTEST
   useEffect(() => {
-    console.log(
-      'in order items component. there are now ',
-      dataOrderItems.length,
-      ' items in this order',
-    );
+    // console.log(
+    // 'in order items component. there are now ',
+    // dataOrderItems.length,
+    // ' items in this order',
+    // );
   }, [dataOrderItems]);
   // console.log(
   //   'in order items component. dataorderitems is:>> ',
@@ -743,11 +588,6 @@ const OrderItemsComponent = ({
         orderId={orderId}
         orderItemId={currentItemId}
         currentCodeNumber={currentCodeNumber}
-      />
-      <AddItem
-        modalVisibleAddItem={modalVisibleAddItem}
-        setModalVisibleAddItem={setModalVisibleAddItem}
-        orderId={orderId}
       />
     </>
   );

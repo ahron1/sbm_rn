@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {useState} from 'react';
 import {Alert, Text, View, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
@@ -9,7 +9,6 @@ import addressLog, {setGeoAddressHelper} from '../../helpers/geoHelpers';
 import AddressForm from '../AddressForm';
 import NameForm from '../NameForm';
 import logOut from '../../context/actions/auth/logOut';
-import credUpdate from '../../context/actions/auth/credUpdate';
 import styles from './styles';
 import Container from '../common/Container';
 import CustomButtonSmall from '../common/CustomButtonSmall';
@@ -51,8 +50,8 @@ const ProfileComponent = () => {
     Geocoder.from(latitude, longitude)
       .then(json => {
         var addressComponent = json.results[0].address_components;
-        addressLog(addressComponent);
-        console.log('address component is:>> ', '\n', addressComponent);
+        // addressLog(addressComponent);
+        // console.log('address component is:>> ', '\n', addressComponent);
         setGeoAddress({});
 
         const setGeoAddressWrapper = (key, value) => {
@@ -66,13 +65,13 @@ const ProfileComponent = () => {
       })
       .catch(error => {
         setLoadingEditAddress(false);
-        console.log('error getting address from coordinates', error);
+        // console.log('error getting address from coordinates', error);
       });
   };
 
   const processLocation = userLocation => {
     if (userLocation) {
-      console.log('current location is ', userLocation);
+      // console.log('current location is ', userLocation);
       var latitude = JSON.parse(JSON.stringify(userLocation)).latitude;
       var longitude = JSON.parse(JSON.stringify(userLocation)).longitude;
       var accuracy = JSON.parse(JSON.stringify(userLocation)).accuracy;
@@ -91,12 +90,12 @@ const ProfileComponent = () => {
 
   const getAndSetLocation = async () => {
     setLoadingEditAddress(true);
-    console.log('in getandsetlocation. getting location now :>> ');
+    // console.log('in getandsetlocation. getting location now :>> ');
     // const userLocation = await RNLocation.getLatestLocation({timeout: 10000});
 
     Geolocation.getCurrentPosition(
       position => {
-        console.log(position);
+        // console.log(position);
         processLocation(position.coords);
         // processLocation({});
       },
@@ -113,7 +112,7 @@ const ProfileComponent = () => {
           ],
         );
 
-        console.log(error.code, error.message);
+        // console.log(error.code, error.message);
       },
       {
         enableHighAccuracy: true,
@@ -126,7 +125,7 @@ const ProfileComponent = () => {
 
   const locationHandler = async () => {
     try {
-      console.log(' in locationhandler. asking for permission ');
+      // console.log(' in locationhandler. asking for permission ');
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
@@ -140,7 +139,7 @@ const ProfileComponent = () => {
         },
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('just got permission ', granted);
+        // console.log('just got permission ', granted);
         getAndSetLocation();
       } else {
         setLoadingEditAddress(false);
@@ -151,7 +150,7 @@ const ProfileComponent = () => {
       }
     } catch (err) {
       setLoadingEditAddress(false);
-      console.warn(err);
+      // console.warn(err);
     }
   };
 
@@ -171,11 +170,11 @@ const ProfileComponent = () => {
       })
       .catch(err => {
         setLoadingEditAddress(false);
-        console.log(
-          'in RNAndroidLocationEnabler. err is:> ',
-          err.code,
-          err.message,
-        );
+        // console.log(
+        // 'in RNAndroidLocationEnabler. err is:> ',
+        // err.code,
+        // err.message,
+        // );
         // The user has not accepted to enable the location services or something went wrong during the process
         // "err" : { "code" : "ERR00|ERR01|ERR02|ERR03", "message" : "message"}
         // codes :
@@ -357,21 +356,15 @@ const ProfileComponent = () => {
           <AddressForm
             modalVisibleAddAddress={modalVisibleAddAddress}
             setModalVisibleAddAddress={setModalVisibleAddAddress}
-            // setStoredAddress={setStoredAddress}
-            // firebaseUid={firebaseUid}
             geoAddress={geoAddress}
             setLoadingEditAddressWrapper={setLoadingEditAddressWrapper}
             systemLocation={systemLocation}
-            // geoPincode={geoAddress.geoPincode}
-            // geoCity={geoAddress.geoCity}
-            // geoState={geoAddress.geoState}
           />
         </View>
         <View>
           <NameForm
             modalVisibleAddName={modalVisibleAddName}
             setModalVisibleAddName={setModalVisibleAddName}
-            // setStoredName={setStoredName}
             firebaseUid={firebaseUid}
             currentUserName={userName}
           />
@@ -380,12 +373,8 @@ const ProfileComponent = () => {
           <StoreServicesForm
             modalVisibleStoreServices={modalVisibleStoreServices}
             setModalVisibleStoreServices={setModalVisibleStoreServices}
-            // setStoredName={setStoredName}
             firebaseUid={firebaseUid}
             currentUserName={userName}
-            // deliveryRadius={deliveryRadius}
-            // offersDelivery={offersDelivery}
-            // offersPickup={offersPickup}
           />
         </View>
       </Container>

@@ -8,7 +8,7 @@ import axiosInstance from '../../helpers/axiosInterceptor';
 export default ({orderId}) =>
   dispatch =>
   onSuccess => {
-    console.log('in confirmpayment action payment is >> ');
+    // console.log('in confirmpayment action payment is >> ');
     dispatch({
       type: CONFIRM_PAYMENT_LOADING,
     });
@@ -18,7 +18,7 @@ export default ({orderId}) =>
         orderId: orderId,
       })
       .then(res => {
-        console.log('in confirmpayment action got response >> ', res.data);
+        // console.log('in confirmpayment action got response >> ', res.data);
         dispatch({
           type: CONFIRM_PAYMENT_SUCCESS,
           // payload: dataOrders,
@@ -27,7 +27,7 @@ export default ({orderId}) =>
         onSuccess();
       })
       .catch(err => {
-        console.log('in confirm payment action error is >> ', err);
+        // console.log('in confirm payment action error is >> ', err);
         dispatch({
           type: CONFIRM_PAYMENT_FAIL,
           // payload: dataOrders,

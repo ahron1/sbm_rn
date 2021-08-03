@@ -7,8 +7,6 @@ import orderItemsInitialState from './initialStates/orderItemsInitialState';
 import orderItemsReducer from './reducers/orderItemsReducer';
 import authReducer from './reducers/AuthReducer';
 import authInitialState from './initialStates/authInitialState';
-import storesReducer from './reducers/storesReducer';
-import storesInitialState from './initialStates/storesInitialState';
 import customersReducer from './reducers/customersReducer';
 import customersInitialState from './initialStates/customersInitialState';
 
@@ -28,14 +26,6 @@ const GlobalProvider = ({children}) => {
     customersReducer,
     customersInitialState,
   );
-  const [storesState, storesDispatch] = useReducer(
-    storesReducer,
-    storesInitialState,
-  );
-  // const [profileState, profileDispatch] = useReducer(
-  // profileReducer,
-  // profileInitialState,
-  // );
 
   return (
     <GlobalContext.Provider
@@ -46,8 +36,6 @@ const GlobalProvider = ({children}) => {
         orderItemsDispatch,
         authState,
         authDispatch,
-        storesState,
-        storesDispatch,
         customersState,
         customersDispatch,
       }}>
