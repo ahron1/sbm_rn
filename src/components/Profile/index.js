@@ -12,12 +12,16 @@ import logOut from '../../context/actions/auth/logOut';
 import styles from './styles';
 import Container from '../common/Container';
 import CustomButtonSmall from '../common/CustomButtonSmall';
+import CustomButton from '../common/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 import colors from '../../assets/theme/colors';
 import StoreServicesForm from '../StoreServicesForm';
+import {ALLORDERS} from '../../constants/routeNames';
 
 Geocoder.init('AIzaSyBw1Ua3oGDMs8WwJyNXLRkpsJSq6Vup0bo'); // use a valid API key
 
 const ProfileComponent = () => {
+  const {navigate} = useNavigation();
   const [modalVisibleAddAddress, setModalVisibleAddAddress] = useState(false);
   const [modalVisibleAddName, setModalVisibleAddName] = useState(false);
   const [modalVisibleStoreServices, setModalVisibleStoreServices] =
@@ -341,10 +345,19 @@ const ProfileComponent = () => {
         </View>
 
         <View>
+          <View style={styles.ordersButtonSection}>
+            <CustomButton
+              style={styles.ordersButton}
+              title="Orders"
+              onPress={() => navigate(ALLORDERS)}
+            />
+          </View>
+        </View>
+
+        <View>
           <View style={styles.logoutButtonSection}>
             <CustomButtonSmall
               style={styles.logoutButton}
-              tertiary
               disabled={authState.logOut.loading}
               loading={authState.logOut.loading}
               title="Signout"
