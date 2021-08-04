@@ -174,11 +174,11 @@ const ProfileComponent = () => {
       })
       .catch(err => {
         setLoadingEditAddress(false);
-        // console.log(
-        // 'in RNAndroidLocationEnabler. err is:> ',
-        // err.code,
-        // err.message,
-        // );
+        console.warn(
+          'in RNAndroidLocationEnabler. err is:> ',
+          err.code,
+          err.message,
+        );
         // The user has not accepted to enable the location services or something went wrong during the process
         // "err" : { "code" : "ERR00|ERR01|ERR02|ERR03", "message" : "message"}
         // codes :

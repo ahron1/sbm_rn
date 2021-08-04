@@ -17,7 +17,7 @@ const App = () => {
   const {authDispatch, authState} = useContext(GlobalContext);
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert(
+      console.log(
         'A new foreground FCM message arrived!',
         JSON.stringify(remoteMessage.data.data_item1),
       );
@@ -30,7 +30,7 @@ const App = () => {
   useEffect(async () => {
     const fcmToken = await messaging().getToken();
     if (fcmToken) {
-      console.log('fcm token is :> ', fcmToken);
+      // console.log('fcm token is :> ', fcmToken);
       // console.log('fcm messaging() object is :> ', messaging());
     }
   }, []);
@@ -38,7 +38,7 @@ const App = () => {
   useEffect(() => {
     const unsubscribe = () => {
       messaging().onTokenRefresh(async token => {
-        Alert.alert('Token was refreshed', JSON.stringify(token));
+        // Alert.alert('Token was refreshed', JSON.stringify(token));
       });
     };
 
