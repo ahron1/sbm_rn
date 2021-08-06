@@ -48,7 +48,7 @@ export default function PhoneNumber() {
           </Text>
           <Text style={styles.introTextTitle}>Step 3:</Text>
           <Text style={styles.introText}>
-            Pickup or delivery by store.{'\n'}
+            Pickup by customer or delivery by store.{'\n'}
           </Text>
         </View>
         <View style={styles.numberSection}>
