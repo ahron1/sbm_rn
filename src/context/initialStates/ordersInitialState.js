@@ -4,16 +4,6 @@ export default {
     error: null,
     loading: false,
   },
-  addOrder: {
-    data: [],
-    error: null,
-    loading: false,
-  },
-  deleteOrder: {
-    data: [],
-    error: null,
-    loading: false,
-  },
   confirmOrder: {
     // data: [],
     error: null,

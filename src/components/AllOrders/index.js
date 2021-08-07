@@ -11,7 +11,6 @@ import {useNavigation} from '@react-navigation/native';
 import {ORDERITEMS, PROFILE} from '../../constants/routeNames';
 import ListFooterComponent from '../common/ListFooter';
 import FloatingCenterButton from '../common/FloatingCenterButton';
-import addOrder from '../../context/actions/addOrder';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import colors from '../../assets/theme/colors';

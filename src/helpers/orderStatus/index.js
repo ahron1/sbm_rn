@@ -61,7 +61,7 @@ const getOrderStatus = order => {
       : status_400_store_fulfilled === true
       ? {
           orderStatusText: 'You fulfilled the order',
-          orderStatusNext: 'Customer will make payment after confirming',
+          orderStatusNext: 'Customer will make payment after receiving',
           // orderColorCode: colors.color2_1_2,
           orderColorCode: colors.grey,
           orderStatusCode: 'status_400_store_fulfilled',

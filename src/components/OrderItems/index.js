@@ -12,7 +12,6 @@ import Icon from '../../components/common/Icon';
 import ListItemSeparatorComponent from '../common/ListItemSeparator';
 import {ALLORDERS, ORDERSTATUS, STORES} from '../../constants/routeNames';
 import {GlobalContext} from '../../context/Provider';
-import deleteOrder from '../../context/actions/deleteOrder';
 import getOrderStatus from '../../helpers/orderStatus';
 import LoadingView from '../LoadingView';
 import getDateTime from '../../helpers/dateTimeString';
@@ -237,7 +236,7 @@ const OrderItemsComponent = ({
           <View>
             <View>
               <FloatingCenterButton
-                buttonText="Check status"
+                buttonText="Order status"
                 iconType="ant"
                 iconName="questioncircle"
                 iconColor={colors.color2_4}
@@ -310,7 +309,7 @@ const OrderItemsComponent = ({
           <View>
             <View>
               <FloatingCenterButton
-                buttonText="Check status"
+                buttonText="Order status"
                 iconType="ant"
                 iconName="questioncircle"
                 iconColor={colors.color2_4}

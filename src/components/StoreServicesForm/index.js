@@ -1,16 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, Alert, TextInput} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {View, Text, Alert} from 'react-native';
 import AppModal from '../common/AppModal';
 // import CustomButton from '../common/CustomButton';
 import CustomButtonMedium from '../common/CustomButtonMedium';
-import {useNavigation} from '@react-navigation/native';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import colors from '../../assets/theme/colors';
 import RadioGroup from 'react-native-radio-buttons-group';
-import {ALLORDERS} from '../../constants/routeNames';
-import orderPayment from '../../context/actions/orderPayment';
-import Icon from '../common/Icon';
 import AppTextInput from '../common/AppTextInput';
 import storeServicesUpdate from '../../context/actions/auth/storeServicesUpdate';
 

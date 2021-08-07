@@ -56,12 +56,12 @@ const OrderItems = ({navigation}) => {
   // }, [navigation, dataGetOrderItems]);
 
   //TODO / TOTEST:
-  useEffect(() => {
-    console.log(
-      'in order items scree. there are now ',
-      dataGetOrderItems.length + ' items in the order',
-    );
-  }, [dataGetOrderItems]);
+  // useEffect(() => {
+  // console.log(
+  // 'in order items scree. there are now ',
+  // dataGetOrderItems.length + ' items in the order',
+  // );
+  // }, [dataGetOrderItems]);
 
   return (
     <OrderItemsComponent

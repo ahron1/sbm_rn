@@ -109,10 +109,7 @@ const OrderStatusComponent = ({
           <Text style={styles.dashboardTextTitle}>Order Id: </Text>
           <Text style={styles.dashboardTextDetail}>{orderId}</Text>
         </View>
-        <View style={styles.dashboardItem}>
-          <Text style={styles.dashboardTextTitle}>Store: </Text>
-          <Text style={styles.dashboardTextDetail}>{storeName}</Text>
-        </View>
+
         <View style={styles.dashboardItem}>
           <Text style={styles.dashboardTextTitle}>Order time:</Text>
           <Text style={styles.dashboardTextDetail}>{orderSentTime}</Text>
@@ -144,7 +141,7 @@ const OrderStatusComponent = ({
               <View style={styles.sectionDesc}>
                 <Text
                   style={[styles.sectionDescText, {color: getTextcolor(100)}]}>
-                  You need stuff at home
+                  Customer needs items
                 </Text>
               </View>
               <View style={styles.sectionDesc}>

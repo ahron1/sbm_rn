@@ -156,7 +156,7 @@ const CustomersComponent = ({
       {type: 'materialCommunity', name: 'trophy-award'},
       {type: 'materialCommunity', name: 'trophy-award'},
     ];
-    const rankNumber = rankNumbersArray.findIndex(x => x > n);
+    const rankNumber = rankNumbersArray.findIndex(x => x >= n);
     const ranksArray = [
       'Just Opened',
       'New Store',
@@ -170,7 +170,7 @@ const CustomersComponent = ({
     ];
     const storeRank = ranksArray[rankNumber];
     const nextRank = ranksArray[rankNumber + 1];
-    const nextNumber = rankNumbersArray[rankNumber]; // + 1];
+    const nextNumber = rankNumbersArray[rankNumber] + 1;
     const badge = badgesArray[rankNumber];
     const badgeColor = badgeColorsArray[rankNumber];
     return {

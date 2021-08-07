@@ -37,8 +37,6 @@ const OffersComponent = () => {
           buttonText="New customer"
           iconType="feather"
           iconName="user-plus"
-          // loading={ordersState.addOrder.loading}
-          // disabled={ordersState.addOrder.loading}
           circleColor={colors.color3_4}
           iconColor={colors.color2_4}
           onPress={() => {
