@@ -6,7 +6,6 @@ let headers = {};
 const axiosInstance = axios.create({
   // baseURL: 'http://localhost:5000',
   baseURL: 'https://storebhai.com',
-  // baseURL: 'http://207.148.124.40',
   headers,
 });
 

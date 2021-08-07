@@ -46,9 +46,7 @@ const Profile = () => {
         .getIdToken()
         //this is the token that should actually be used for UID auth.
         //App does not do this ^ rn, instead just the UID is checked.
-        .then(token =>
-          console.log('in profile screen. users uid token is ', token),
-        );
+        .then(token => console.info('got users token'));
       messaging()
         .getToken()
         .then(token => {

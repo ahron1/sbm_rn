@@ -5575,6 +5575,11 @@ react-native-modal-dropdown@^1.0.1:
   dependencies:
     prop-types "^15.6.0"
 
+react-native-push-notification@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-7.4.0.tgz#81192356eddfee8eeaf72a9a696c7c90bf5b0ece"
+  integrity sha512-Ac3Ep71e2D8Q/Vy0OHBAO5JwhsFsNSuf9knkpXQWS0B9488nIZJLEMuTpF8610xPvGw7XxVrL/q0oZO5F1pOzw==
+
 react-native-radio-buttons-group@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/react-native-radio-buttons-group/-/react-native-radio-buttons-group-2.2.4.tgz#d82bd6a12eeec7d6b4bbcf1082424c5e764c778e"

@@ -5,6 +5,7 @@ import DrawerNavigator from './DrawerNavigator.js';
 import colors from '../assets/theme/colors';
 import {GlobalContext} from '../context/Provider.js';
 import SplashScreen from 'react-native-splash-screen';
+import HomeNavigator from './HomeNavigator.js';
 
 const AppNavContainer = () => {
   const {authState} = useContext(GlobalContext);
