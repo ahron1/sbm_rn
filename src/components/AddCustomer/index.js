@@ -52,8 +52,8 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
           'whatsapp://send?text=' +
             'Namaskar, ' +
             formAddCustomer.customerName +
-            '.\n\n We just made an account for our store on the Storebhai app. It makes it very easy to order from our store. ' +
-            'So please use the Storebhai app and send us your order. It will be a great experience. \n\n' +
+            '.\n\n We just made an account for our store on the Storebhai app. It makes it very easy for you to order from our store. ' +
+            'So please use the Storebhai app and send us your order. It will be a better experience. \n\n' +
             'Please install the app from this link now: \n' +
             'http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ',
         );
