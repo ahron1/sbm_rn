@@ -14,11 +14,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "509367617184-2kb0263gbticvj6qapj40av5tr56r79g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storebhai.android_manager_app",
+            "certificate_hash": "0656fd0099a755377e716ab1476d7d826b6749e3"
+          }
+        },
+        {
           "client_id": "509367617184-c7f402lt00540e1n87j1l67adh7ur9a7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.storebhai.android_manager_app",
             "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "509367617184-rdmpjsgh3judgf4cqh3po6hfefq36o33.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storebhai.android_manager_app",
+            "certificate_hash": "e8d071365b682316e46498c11243a8a3aabb3288"
           }
         },
         {
