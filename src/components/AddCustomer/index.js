@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, Linking} from 'react-native';
 import AppModal from '../common/AppModal';
 import CustomButtonMedium from '../common/CustomButtonMedium';
@@ -8,10 +8,24 @@ import styles from './styles';
 import colors from '../../assets/theme/colors';
 import addCustomer from '../../context/actions/addCustomer';
 
-const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
+const AddCustomer = ({
+  modalVisibleAddCustomer,
+  setModalVisibleAddCustomer,
+  contactDetails,
+}) => {
   const {customersDispatch, customersState} = useContext(GlobalContext);
   const [formAddCustomer, setFormAddCustomer] = useState({});
   const [formErrorsAddCustomer, setFormErrorsAddCustomer] = useState({});
+  const customerName = contactDetails?.contactName;
+  const customerNumber = contactDetails?.contactNumber;
+  useEffect(() => {
+    setFormAddCustomer({
+      customerName: customerName,
+      customerNumber: customerNumber,
+    });
+  }, [customerName, customerNumber]);
+
+  // console.log('formaddcustomer is ', JSON.stringify(formAddCustomer));
 
   const onSubmitAddCustomer = () => {
     if (!formAddCustomer.customerName) {
@@ -32,31 +46,44 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
       Object.values(formAddCustomer).length >= 2 &&
       Object.values(formAddCustomer).every(x => x.trim().length > 0)
     ) {
+      const formName = formAddCustomer.customerName;
+      const formNumber = formAddCustomer.customerNumber;
+      const formNumberNoSpaces = formNumber.replace(/\s/g, '');
+      const formNumberClean = formNumberNoSpaces.slice(
+        formNumberNoSpaces.length - 10,
+      );
+      const formNumberFull = '+91' + formNumberClean;
+      const message =
+        'Namaskar, ' +
+        formName +
+        ',' +
+        ' \n\nWe just made an account for our store on the Storebhai app. It makes it very easy for you to order from our store.' +
+        ' \n\nSo please use the Storebhai app and send us your order. It will be a better experience.' +
+        ' \n\nPlease install the app from this link now: \n' +
+        ' http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ';
+
       // console.log(
-      // 'A OK, will add new customer',
-      // formAddCustomer.customerName,
-      // formAddCustomer.customerNumber,
+      // 'A OK, will add new customer name ',
+      // formName,
+      // 'number ',
+      // formNumberFixed,
       // );
+
       addCustomer({
-        customerName: formAddCustomer.customerName,
-        customerNumber: formAddCustomer.customerNumber,
+        customerName: formName,
+        customerNumber: formNumberFull,
       })(customersDispatch)(() => {
         setFormErrorsAddCustomer({});
         setFormAddCustomer({});
         setModalVisibleAddCustomer(false);
-        // console.log(
-        // 'in add customer component. name is ',
-        // formAddCustomer.customerName,
-        // );
         Linking.openURL(
-          'whatsapp://send?text=' +
-            'Namaskar, ' +
-            formAddCustomer.customerName +
-            '.\n\n We just made an account for our store on the Storebhai app. It makes it very easy for you to order from our store. ' +
-            'So please use the Storebhai app and send us your order. It will be a better experience. \n\n' +
-            'Please install the app from this link now: \n' +
-            'http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ',
+          // 'whatsapp://send?text=' + message + '&phone=91' + formNumberClean,
+          'whatsapp://send?text=' + message + '&phone=' + formNumberFull,
         );
+      })(() => {
+        setFormErrorsAddCustomer({});
+        setFormAddCustomer({});
+        setModalVisibleAddCustomer(false);
       });
     } else {
       // console.log('New customer cannot add -errors');
@@ -104,7 +131,7 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
               label="Customer Name: "
               placeholder="Mr. Important Customer"
               maxLength={30}
-              value={formAddCustomer.customerName || ''}
+              value={formAddCustomer.customerName || customerName}
               onChangeText={value => {
                 onChangeAddCustomer({
                   name: 'customerName',
@@ -118,7 +145,8 @@ const AddCustomer = ({modalVisibleAddCustomer, setModalVisibleAddCustomer}) => {
               label="Customer's WhatsApp Number:"
               placeholder="9876543210"
               keyboardType="phone-pad"
-              value={formAddCustomer.customerNumber || ''}
+              // value={formAddCustomer.customerNumber || ''}
+              value={formAddCustomer.customerNumber || customerNumber}
               maxLength={15}
               onChangeText={value => {
                 onChangeAddCustomer({

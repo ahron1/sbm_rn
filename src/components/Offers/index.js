@@ -5,7 +5,7 @@ import {GlobalContext} from '../../context/Provider';
 import FloatingCenterButton from '../common/FloatingCenterButton';
 import {useNavigation} from '@react-navigation/native';
 import colors from '../../assets/theme/colors';
-import {PROFILE} from '../../constants/routeNames';
+import {CUSTOMERS, PROFILE} from '../../constants/routeNames';
 import AddCustomer from '../AddCustomer';
 import CustomButtonMedium from '../common/CustomButtonMedium';
 
@@ -34,15 +34,16 @@ const OffersComponent = () => {
           </View>
         </View>
         <FloatingCenterButton
-          buttonText="New customer"
-          iconType="feather"
-          iconName="user-plus"
+          buttonText="Customers"
+          iconType="ionicon"
+          iconName="md-people-outline"
           circleColor={colors.color3_4}
           iconColor={colors.color2_4}
           onPress={() => {
             // console.log('in orders empty component. + button pressed');
             if (authState.latitude && authState.longitude) {
-              setModalVisibleAddCustomer(true);
+              // setModalVisibleAddCustomer(true);
+              navigate(CUSTOMERS);
             } else {
               Alert.alert(
                 'Not logged in',

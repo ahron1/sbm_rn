@@ -5528,6 +5528,11 @@ react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-action-sheet@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-action-sheet/-/react-native-action-sheet-2.2.0.tgz#309a87f53bf4e7b17fdd9d24b10b8dcbaebb7230"
+  integrity sha512-4lsuxH+Cn3/aUEs1VCwqvLhEFyXNqYTkT67CzgTwlifD9Ij4OPQAIs8D+HUD9zBvWc4NtT6cyG1lhArPVMQeVw==
+
 react-native-android-location-enabler@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-native-android-location-enabler/-/react-native-android-location-enabler-1.2.2.tgz#84b8dbbda0d5198d99cf264e6be4edaa7f256ba1"
@@ -5611,6 +5616,13 @@ react-native-screens@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.2.0.tgz#e2c8a4879c72f49af5b49e8859c84978a95d112b"
   integrity sha512-pV4a32neQA69xhVsL9k1J/rM/SiP5zgGHjJsnNVEcuhBu+dlsutT2YFszQN4MgpP2dhHHu1O7DyRSHti+wh7Wg==
+
+react-native-select-contact@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/react-native-select-contact/-/react-native-select-contact-1.6.3.tgz#4aef99118f1feb862b7d3198740b011888db2b14"
+  integrity sha512-TI+mvioD86ZZcOaBmndJAsKla1QF0dlX7Oa2aw37uUDPp8HKAkSwUWl8q/AxYtdLJohasgsLVlUskXzLK4KEjA==
+  optionalDependencies:
+    react-native-action-sheet "^2.2.0"
 
 react-native-size-matters@^0.4.0:
   version "0.4.0"

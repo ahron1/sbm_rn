@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {ORDERITEMS, PROFILE} from '../../constants/routeNames';
+import {CUSTOMERS, ORDERITEMS, PROFILE} from '../../constants/routeNames';
 import ListFooterComponent from '../common/ListFooter';
 import FloatingCenterButton from '../common/FloatingCenterButton';
 import {GlobalContext} from '../../context/Provider';
@@ -225,15 +225,16 @@ const AllOrdersComponent = ({
       />
 
       <FloatingCenterButton
-        buttonText="Add customer"
-        iconType="feather"
-        iconName="user-plus"
+        buttonText="Customers"
+        iconType="ionicon"
+        iconName="md-people-outline"
         circleColor={colors.color3_4}
         iconColor={colors.color2_4}
         onPress={() => {
           // console.log('in orders empty component. + button pressed');
           if (authState.latitude && authState.longitude) {
-            setModalVisibleAddCustomer(true);
+            // setModalVisibleAddCustomer(true);
+            navigate(CUSTOMERS);
           } else {
             Alert.alert(
               'Not logged in',

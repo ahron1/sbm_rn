@@ -9,7 +9,8 @@ import axiosInstance from '../../helpers/axiosInterceptor';
 const addCustomer =
   ({customerName, customerNumber}) =>
   dispatch =>
-  onSuccess => {
+  onSuccess =>
+  onFail => {
     dispatch({
       type: ADD_CUSTOMER_LOADING,
     });
@@ -41,6 +42,7 @@ const addCustomer =
           type: ADD_CUSTOMER_FAIL,
           payload: err,
         });
+        onFail();
       });
   };
 

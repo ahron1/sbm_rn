@@ -12,6 +12,7 @@ import AddCustomer from '../AddCustomer';
 import FloatingCenterButton from '../common/FloatingCenterButton';
 import ListFooterComponent from '../common/ListFooter';
 import Icon from '../common/Icon';
+import {selectContactPhone} from 'react-native-select-contact';
 
 const CustomersComponent = ({
   dataGetCustomers,
@@ -21,11 +22,14 @@ const CustomersComponent = ({
   const [modalVisibleAddCustomer, setModalVisibleAddCustomer] = useState(false);
   const {navigate} = useNavigation();
   const {authState} = useContext(GlobalContext);
+  const [contactDetails, setContactDetails] = useState({});
   let customerView;
 
   const renderItem = ({item}) => {
     const customerName = item.customer_name;
     const customerNumber = item.customer_mobile_number;
+    const message =
+      'Namaskar, ' + customerName + '. I want to update about ...';
     return (
       <Pressable
         onPress={() => {
@@ -45,9 +49,9 @@ const CustomersComponent = ({
               onPress: () => {
                 Linking.openURL(
                   'whatsapp://send?text=' +
-                    'Namaskar, ' +
-                    customerName +
-                    '. I want to update about .... ',
+                    message +
+                    '&phone=' +
+                    customerNumber,
                 );
               },
             },
@@ -182,6 +186,23 @@ const CustomersComponent = ({
     };
   };
 
+  const getPhoneNumber = () => {
+    return selectContactPhone().then(selection => {
+      if (!selection) {
+        return null;
+      }
+
+      let {contact, selectedPhone} = selection;
+      // console.log(`Selected ${selectedPhone.number} from ${contact.name}`);
+      setContactDetails({
+        contactName: contact.name,
+        contactNumber: selectedPhone.number,
+      });
+      setModalVisibleAddCustomer(true);
+      // return selectedPhone.number;
+    });
+  };
+
   if (authState.latitude && authState.longitude) {
     if (loadingGetCustomers) {
       customerView = <LoadingView />;
@@ -252,7 +273,9 @@ const CustomersComponent = ({
             onPress={() => {
               // console.log('in orders empty component. + button pressed');
               if (authState.latitude && authState.longitude) {
-                setModalVisibleAddCustomer(true);
+                // setModalVisibleAddCustomer(true);
+                // console.log('adding new customer');
+                getPhoneNumber();
               } else {
                 Alert.alert(
                   'Not logged in',
@@ -272,6 +295,7 @@ const CustomersComponent = ({
           <AddCustomer
             modalVisibleAddCustomer={modalVisibleAddCustomer}
             setModalVisibleAddCustomer={setModalVisibleAddCustomer}
+            contactDetails={contactDetails}
           />
         </>
       );
