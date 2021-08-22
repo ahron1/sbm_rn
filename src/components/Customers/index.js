@@ -1,5 +1,13 @@
 import React, {useContext, useState} from 'react';
-import {Alert, FlatList, Linking, Pressable, Text, View} from 'react-native';
+import {
+  PermissionsAndroid,
+  Alert,
+  FlatList,
+  Linking,
+  Pressable,
+  Text,
+  View,
+} from 'react-native';
 import colors from '../../assets/theme/colors';
 import {GlobalContext} from '../../context/Provider';
 import CustomButtonMedium from '../common/CustomButtonMedium';
@@ -186,21 +194,41 @@ const CustomersComponent = ({
     };
   };
 
-  const getPhoneNumber = () => {
-    return selectContactPhone().then(selection => {
-      if (!selection) {
-        return null;
-      }
+  const getPhoneNumber = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+        {
+          title: 'Storebhai Contacts Permission ',
+          message:
+            'Storebhai Manager App needs access to your contacts ' +
+            'so you can add new customers',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // console.log('You can use the contacts');
+        return selectContactPhone().then(selection => {
+          if (!selection) {
+            return null;
+          }
 
-      let {contact, selectedPhone} = selection;
-      // console.log(`Selected ${selectedPhone.number} from ${contact.name}`);
-      setContactDetails({
-        contactName: contact.name,
-        contactNumber: selectedPhone.number,
-      });
-      setModalVisibleAddCustomer(true);
-      // return selectedPhone.number;
-    });
+          let {contact, selectedPhone} = selection;
+          // console.log(`Selected ${selectedPhone.number} from ${contact.name}`);
+          setContactDetails({
+            contactName: contact.name,
+            contactNumber: selectedPhone.number,
+          });
+          setModalVisibleAddCustomer(true);
+          // return selectedPhone.number;
+        });
+      } else {
+        // console.log('Contacts permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
   };
 
   if (authState.latitude && authState.longitude) {
