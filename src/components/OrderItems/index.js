@@ -148,31 +148,31 @@ const OrderItemsComponent = ({
                 loading={ordersState.confirmPayment.loading}
                 disabled={ordersState.confirmPayment.loading}
                 onPress={() => {
-                  confirmPayment({
-                    orderId,
-                  })(ordersDispatch)(() => {
-                    // console.log(
-                    // 'in order items components. payment confirmed . going back to all orders',
-                    // );
-                    Alert.alert(
-                      'Confirm payment    ₹ ' + total,
-                      'Did you receive the payment?' +
-                        '\n\nAfter receiving payment from the customer, press OK to confirm.' +
-                        '\n\nIf you have not yet received the payment, press Cancel',
-                      [
-                        {
-                          text: 'Cancel',
-                        },
-                        {
-                          text: 'OK',
-                          onPress: () => {
+                  Alert.alert(
+                    'Confirm payment    ₹ ' + total,
+                    'Did you receive the payment?' +
+                      '\n\nAfter receiving payment from the customer, press OK to confirm.' +
+                      '\n\nIf you have not yet received the payment, press Cancel',
+                    [
+                      {
+                        text: 'Cancel',
+                      },
+                      {
+                        text: 'OK',
+                        onPress: () => {
+                          // console.log('OKKKKK');
+                          confirmPayment({
+                            orderId,
+                          })(ordersDispatch)(() => {
                             navigate(ALLORDERS);
-                            // console.log('OKKKKK');
-                          },
+                            // console.log(
+                            // 'in order items components. payment confirmed . going back to all orders',
+                            // );
+                          });
                         },
-                      ],
-                    );
-                  });
+                      },
+                    ],
+                  );
                 }}
               />
             </View>
