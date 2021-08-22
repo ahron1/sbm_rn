@@ -12,7 +12,6 @@ const NameForm = ({
   modalVisibleAddName,
   setModalVisibleAddName,
   // setStoredName,
-  firebaseUid,
   currentUserName,
 }) => {
   const [formAddName, setFormAddName] = useState(
@@ -28,7 +27,7 @@ const NameForm = ({
     // userName,
     // firebaseUid,
     // );
-    userNameUpdate({userName, firebaseUid})(authDispatch)(() =>
+    userNameUpdate({userName})(authDispatch)(() =>
       setModalVisibleAddName(false),
     );
   };

@@ -7,7 +7,7 @@ import {
 import axiosInstance from '../../../helpers/axiosInterceptor';
 
 const userNameUpdate =
-  ({firebaseUid, userName}) =>
+  ({userName}) =>
   dispatch =>
   onSuccess => {
     // console.log(
