@@ -17,6 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import colors from '../../assets/theme/colors';
 import StoreServicesForm from '../StoreServicesForm';
 import {ALLORDERS} from '../../constants/routeNames';
+import StorePaymentsForm from '../StorePaymentsForm';
 
 Geocoder.init('AIzaSyBw1Ua3oGDMs8WwJyNXLRkpsJSq6Vup0bo'); // use a valid API key
 
@@ -25,6 +26,8 @@ const ProfileComponent = () => {
   const [modalVisibleAddAddress, setModalVisibleAddAddress] = useState(false);
   const [modalVisibleAddName, setModalVisibleAddName] = useState(false);
   const [modalVisibleStoreServices, setModalVisibleStoreServices] =
+    useState(false);
+  const [modalVisibleStorePayments, setModalVisibleStorePayments] =
     useState(false);
   const [loadingEditAddress, setLoadingEditAddress] = useState(false);
 
@@ -45,6 +48,9 @@ const ProfileComponent = () => {
   const deliveryRadius = authState.deliveryRadius;
   const offersPickup = authState.offersPickup;
   const offersDelivery = authState.offersDelivery;
+  const paymentOnline = authState.paymentOnline;
+  const paymentCash = authState.paymentCash;
+  const paymentCredit = authState.paymentCredit;
 
   const setLoadingEditAddressWrapper = x => {
     setLoadingEditAddress(x);
@@ -306,6 +312,54 @@ const ProfileComponent = () => {
 
         <View>
           <View style={styles.sectionTitle}>
+            <Text style={styles.titleText}>Payment methods</Text>
+
+            <CustomButtonSmall
+              style={styles.button}
+              primary
+              title="Edit"
+              // loading={authState.storeServicesUpdate.loading}
+              // disabled={authState.storeServicesUpdate.loading}
+              onPress={() => {
+                setModalVisibleStorePayments(true);
+              }}
+            />
+          </View>
+          <View style={styles.sectionBody}>
+            <View style={styles.sectionText}>
+              {paymentOnline !== null &&
+              paymentCash !== null &&
+              paymentCredit !== null ? (
+                <View>
+                  <View style={styles.profileDetail}>
+                    <Text style={styles.profileDetailTitle}>Cash payment:</Text>
+                    <Text style={styles.profileDetailContent}>
+                      {paymentCash ? 'Yes' : 'No'}
+                    </Text>
+                  </View>
+                  <View style={styles.profileDetail}>
+                    <Text style={styles.profileDetailTitle}>
+                      Online/UPI payment:
+                    </Text>
+                    <Text style={styles.profileDetailContent}>
+                      {paymentOnline ? 'Yes' : 'No'}
+                    </Text>
+                  </View>
+                </View>
+              ) : (
+                <View>
+                  <Text style={styles.emptySectionText}>
+                    You have not updated your store's payment details. Please
+                    update.
+                  </Text>
+                </View>
+              )}
+            </View>
+          </View>
+        </View>
+
+        <View>
+          <View style={styles.sectionTitle}>
             <Text style={styles.titleText}>Store Address</Text>
 
             <CustomButtonSmall
@@ -378,7 +432,7 @@ const ProfileComponent = () => {
           <NameForm
             modalVisibleAddName={modalVisibleAddName}
             setModalVisibleAddName={setModalVisibleAddName}
-            firebaseUid={firebaseUid}
+            // firebaseUid={firebaseUid}
             currentUserName={userName}
           />
         </View>
@@ -386,8 +440,16 @@ const ProfileComponent = () => {
           <StoreServicesForm
             modalVisibleStoreServices={modalVisibleStoreServices}
             setModalVisibleStoreServices={setModalVisibleStoreServices}
-            firebaseUid={firebaseUid}
-            currentUserName={userName}
+            // firebaseUid={firebaseUid}
+            // currentUserName={userName}
+          />
+        </View>
+        <View>
+          <StorePaymentsForm
+            modalVisibleStorePayments={modalVisibleStorePayments}
+            setModalVisibleStorePayments={setModalVisibleStorePayments}
+            // firebaseUid={firebaseUid}
+            // currentUserName={userName}
           />
         </View>
       </Container>

@@ -24,6 +24,9 @@ import {
   STORE_SERVICES_UPDATE_FAIL,
   STORE_SERVICES_UPDATE_LOADING,
   STORE_SERVICES_UPDATE_SUCCESS,
+  STORE_PAYMENTS_UPDATE_FAIL,
+  STORE_PAYMENTS_UPDATE_LOADING,
+  STORE_PAYMENTS_UPDATE_SUCCESS,
 } from '../../constants/actionTypes';
 
 const authReducer = (state, {type, payload}) => {
@@ -296,6 +299,11 @@ const authReducer = (state, {type, payload}) => {
         offersPickup: payload.offers_pickup,
         offersDelivery: payload.offers_delivery,
 
+        paymentCash: payload.payment_cash,
+        paymentCredit: payload.payment_credit,
+        paymentOnline: payload.payment_online,
+        upiId: payload.upi_id,
+
         getUserDetails: {
           ...state.getUserDetails,
           loading: false,
@@ -345,6 +353,38 @@ const authReducer = (state, {type, payload}) => {
           error: payload
             ? payload
             : 'There was an error updating your services on the server',
+        },
+      };
+    case STORE_PAYMENTS_UPDATE_LOADING:
+      return {
+        ...state,
+        storePaymentsUpdate: {
+          ...state.storePaymentsUpdate,
+          loading: true,
+        },
+      };
+    case STORE_PAYMENTS_UPDATE_SUCCESS:
+      return {
+        ...state,
+        paymentOnline: payload.paymentOnline,
+        upiId: payload.upiId,
+
+        storePaymentsUpdate: {
+          ...state.storePaymentsUpdate,
+          loading: false,
+          error: null,
+          // data: payload,
+        },
+      };
+    case STORE_PAYMENTS_UPDATE_FAIL:
+      return {
+        ...state,
+        storePaymentsUpdate: {
+          ...state.storePaymentsUpdate,
+          loading: false,
+          error: payload
+            ? payload
+            : 'There was an error updating your payments on the server',
         },
       };
   }

@@ -20,6 +20,10 @@ export default {
   deliveryRadius: null,
   offersPickup: null,
   offersDelivery: null,
+  paymentOnline: null,
+  paymentCash: null,
+  paymentCredit: null,
+  upiId: null,
 
   phoneNumberSignInSubmit: {
     error: null,
@@ -49,6 +53,11 @@ export default {
     error: null,
     loading: false,
   },
+  storePaymentsUpdate: {
+    error: null,
+    loading: false,
+  },
+
   getUserDetails: {
     error: null,
     loading: false,

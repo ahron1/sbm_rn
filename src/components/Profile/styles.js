@@ -37,7 +37,7 @@ export default ScaledSheet.create({
   },
   profileDetailTitle: {
     fontSize: '18@s',
-    flex: 3,
+    flex: 4,
     // fontWeight: '700',
     // flexWrap: 'wrap',
   },
