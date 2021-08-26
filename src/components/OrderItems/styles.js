@@ -13,6 +13,11 @@ export default ScaledSheet.create({
   dashboardItem: {
     flexDirection: 'row',
   },
+  dashboardButton: {
+    flex: 1,
+    paddingHorizontal: '20@s',
+    paddingVertical: '5@s',
+  },
   dashboardItemTitle: {
     fontSize: '16@s',
     flex: 3,
@@ -24,6 +29,18 @@ export default ScaledSheet.create({
     fontFamily: 'Tillana-Medium',
     fontSize: '16@s',
   },
+  dashboardNameTitle: {
+    fontSize: '19@s',
+    flex: 3,
+    // fontWeight: '700',
+    // flexWrap: 'wrap',
+  },
+  dashboardNameContent: {
+    flex: 7,
+    fontFamily: 'Tillana-Medium',
+    fontSize: '19@s',
+  },
+
   dashboardItemTitleFreeFlow: {
     fontSize: '18@s',
     // flex: 3,
@@ -41,6 +58,11 @@ export default ScaledSheet.create({
     paddingVertical: '9@s',
     // minHeight: '100@s',
     // backgroundColor: colors.color2_1_3,
+  },
+  customerBoard: {
+    paddingHorizontal: '9@s',
+    paddingVertical: '9@s',
+    backgroundColor: colors.color2_3,
   },
 
   columnHeaders: {
@@ -66,8 +88,10 @@ export default ScaledSheet.create({
     paddingVertical: '10@s',
   },
 
-  buttons: {
-    // minHeight: 40,
+  button: {
+    paddingHorizontal: '12@s',
+    // backgroundColor: colors.normalgrey,
+    backgroundColor: colors.color4_1,
   },
   listRowItem: {
     flexDirection: 'row',

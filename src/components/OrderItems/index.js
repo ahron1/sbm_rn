@@ -18,6 +18,7 @@ import getDateTime from '../../helpers/dateTimeString';
 import confirmOrder from '../../context/actions/confirmOrder';
 import confirmFulfil from '../../context/actions/confirmFulfil';
 import confirmPayment from '../../context/actions/confirmPayment';
+import CustomButtonSmall from '../common/CustomButtonSmall';
 
 // const OrderItemsComponent = ({orderStatusDetails, dataOrderItems}) => {
 const OrderItemsComponent = ({
@@ -35,11 +36,7 @@ const OrderItemsComponent = ({
     x => x.order_id === orderId,
   );
 
-  // console.log(
-  // 'in orderitems component. orders state is:>> ',
-  // ordersState.getOrders.data.filter(x => x.order_id === orderId),
-  // order,
-  // );
+  // console.log('order is > \n', order);
 
   const {
     time_100_created,
@@ -50,6 +47,11 @@ const OrderItemsComponent = ({
     store_name: storeName,
     store_id: storeId,
     customer_note: orderComments,
+    customer_mobile_number: customerMobileNumber,
+    customer_address_line1: customerAddressLine1,
+    customer_address_line2: customerAddressLine2,
+    customer_city: customerCity,
+    customer_pincode: customerPincode,
   } = order ? order : {};
   // the conditional assignment is to take care of deletion where the order item details are no longer found after deletion
 
@@ -346,8 +348,75 @@ const OrderItemsComponent = ({
   };
 
   const ListHeaderComponent = () => {
+    const message =
+      'Namaskar, ' + customerName + '. I want to update about ...';
+
     return (
       <View>
+        <View style={[styles.customerBoard]}>
+          <View style={styles.dashboardItem}>
+            <Text style={[styles.dashboardNameTitle]}>Customer: </Text>
+            <Text style={[styles.dashboardNameContent]}>{customerName}</Text>
+          </View>
+          <View style={styles.dashboardItem}>
+            <View style={styles.dashboardButton}>
+              <CustomButtonSmall
+                style={styles.button}
+                primary
+                title="Address"
+                // loading={authState.userNameUpdate.loading}
+                // disabled={authState.userNameUpdate.loading}
+                onPress={() => {
+                  Alert.alert(
+                    customerName,
+                    customerAddressLine1 +
+                      '\n' +
+                      customerAddressLine2 +
+                      '\n' +
+                      customerCity +
+                      '\n' +
+                      customerPincode,
+                  );
+                  // setModalVisibleAddName(true);
+                }}
+              />
+            </View>
+            <View style={styles.dashboardButton}>
+              <CustomButtonSmall
+                style={styles.button}
+                primary
+                title="Contact"
+                // loading={authState.userNameUpdate.loading}
+                // disabled={authState.userNameUpdate.loading}
+                onPress={() => {
+                  // console.log('contact touched ', customerName);
+                  Alert.alert(customerName, 'Number: ' + customerMobileNumber, [
+                    {
+                      text: 'Cancel',
+                    },
+                    {
+                      text: 'Call',
+                      onPress: () => {
+                        Linking.openURL(`tel:${customerMobileNumber}`);
+                      },
+                    },
+                    {
+                      text: 'WhatsApp',
+                      onPress: () => {
+                        Linking.openURL(
+                          'whatsapp://send?text=' +
+                            message +
+                            '&phone=' +
+                            customerMobileNumber,
+                        );
+                      },
+                    },
+                  ]);
+                }}
+              />
+            </View>
+          </View>
+        </View>
         <View style={[styles.statusboard, {backgroundColor: orderColorCode}]}>
           <View style={styles.dashboardItem}>
             <Text style={[styles.dashboardItemTitle, {color: orderColorText}]}>
@@ -386,15 +455,6 @@ const OrderItemsComponent = ({
               </Text>
             </View>
           )}
-          <View style={styles.dashboardItem}>
-            <Text style={[styles.dashboardItemTitle, {color: orderColorText}]}>
-              Customer:{' '}
-            </Text>
-            <Text
-              style={[styles.dashboardItemContent, {color: orderColorText}]}>
-              {customerName}
-            </Text>
-          </View>
           {orderComments && (
             <View style={styles.dashboardItem}>
               <Text
