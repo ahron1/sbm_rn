@@ -41,7 +41,7 @@ const App = () => {
   //foreground notification
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      console.log(JSON.stringify(remoteMessage));
+      // console.log(JSON.stringify(remoteMessage));
       PushNotification.localNotification({
         channelId: 'notification_channel_1',
         message: remoteMessage.notification.body,
