@@ -324,6 +324,7 @@ const CustomersComponent = ({
             modalVisibleAddCustomer={modalVisibleAddCustomer}
             setModalVisibleAddCustomer={setModalVisibleAddCustomer}
             contactDetails={contactDetails}
+            storeName={authState.userName}
           />
         </>
       );

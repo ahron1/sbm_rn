@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import styles from './styles';
-import {Alert, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Linking, Text, TouchableOpacity, View} from 'react-native';
 import {GlobalContext} from '../../context/Provider';
 import FloatingCenterButton from '../common/FloatingCenterButton';
 import {useNavigation} from '@react-navigation/native';
@@ -34,20 +34,43 @@ const OffersComponent = () => {
           </View>
         </View>
         <FloatingCenterButton
-          buttonText="Customers"
-          iconType="ionicon"
-          iconName="md-people-outline"
+          buttonText="Broadcast"
+          iconType="fa"
+          iconName="bullhorn"
           circleColor={colors.color3_4}
           iconColor={colors.color2_4}
           onPress={() => {
             // console.log('in orders empty component. + button pressed');
             if (authState.latitude && authState.longitude) {
               // setModalVisibleAddCustomer(true);
-              navigate(CUSTOMERS);
+              // navigate(CUSTOMERS);
+              const storeName = authState.userName;
+              // console.log('in component offers. ', storeName);
+              const message =
+                'Namaskar, ' +
+                ' \n\n' +
+                storeName +
+                ' is now on Storebhai! ' +
+                ' \n\nSo please use the Storebhai app and send your orders to ' +
+                storeName +
+                '. It is very easy and a better experience.' +
+                ' \n\nInstall the Storebhai app from this link now: ' +
+                ' \n' +
+                ' http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ' +
+                '\n\n' +
+                storeName +
+                ' looks forward to serving your orders on Storebhai.' +
+                '\n\n' +
+                'StayHomeStaySafe, \n' +
+                storeName;
+              Linking.openURL(
+                // 'whatsapp://send?text=' + message + '&phone=91' + formNumberClean,
+                'whatsapp://send?text=' + message,
+              );
             } else {
               Alert.alert(
                 'Not logged in',
-                'Please log in first to add customers.',
+                'Please log in first.',
 
                 [
                   {

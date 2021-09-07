@@ -102,37 +102,37 @@ export default ScaledSheet.create({
   itemTitle: {
     fontFamily: 'sans-serif-smallcaps',
     flex: 5,
-    fontSize: '25@s',
+    fontSize: '21@s',
     fontWeight: '700',
   },
   quantityTitle: {
     fontFamily: 'sans-serif-smallcaps',
     flex: 1.5,
-    fontSize: '25@s',
+    fontSize: '21@s',
     fontWeight: '700',
   },
   priceTitle: {
     fontFamily: 'sans-serif-smallcaps',
-    fontSize: '25@s',
+    fontSize: '21@s',
     flex: 2.25,
     flexWrap: 'wrap',
   },
 
   itemInfo: {
     fontFamily: 'Tillana-Medium',
-    fontSize: '21@s',
+    fontSize: '18@s',
     flex: 5,
     flexWrap: 'wrap',
   },
   quantityInfo: {
     fontFamily: 'Tillana-Medium',
-    fontSize: '21@s',
+    fontSize: '18@s',
     flex: 1.5,
     flexWrap: 'wrap',
   },
   priceInfo: {
     fontFamily: 'Tillana-Medium',
-    fontSize: '21@s',
+    fontSize: '18@s',
     flex: 2.25,
     flexWrap: 'wrap',
   },
@@ -146,11 +146,11 @@ export default ScaledSheet.create({
   },
   checkMark: {
     color: colors.color4_1,
-    fontSize: '24@s',
+    fontSize: '21@s',
   },
   crossMark: {
     color: colors.color3_1,
-    fontSize: '24@s',
+    fontSize: '21@s',
   },
   price: {
     color: colors.color4_1,

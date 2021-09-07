@@ -56,11 +56,11 @@ export default ScaledSheet.create({
   rowItemContent: {
     flex: 6,
     fontFamily: 'Tillana-Medium',
-    fontSize: '18@s',
+    fontSize: '15@s',
     // flexWrap: 'wrap',
   },
   rowItemTitleBold: {
-    fontSize: '18@s',
+    fontSize: '15@s',
     flex: 2.5,
     fontWeight: '700',
     // flexWrap: 'wrap',
@@ -68,7 +68,7 @@ export default ScaledSheet.create({
   rowItemContentBold: {
     flex: 6,
     fontFamily: 'Tillana-SemiBold',
-    fontSize: '18@s',
+    fontSize: '15@s',
     // flexWrap: 'wrap',
   },
   emptyButtonSection: {

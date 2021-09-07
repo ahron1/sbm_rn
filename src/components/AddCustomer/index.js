@@ -12,6 +12,7 @@ const AddCustomer = ({
   modalVisibleAddCustomer,
   setModalVisibleAddCustomer,
   contactDetails,
+  storeName,
 }) => {
   const {customersDispatch, customersState} = useContext(GlobalContext);
   const [formAddCustomer, setFormAddCustomer] = useState({});
@@ -55,12 +56,21 @@ const AddCustomer = ({
       const formNumberFull = '+91' + formNumberClean;
       const message =
         'Namaskar, ' +
-        formName +
-        ',' +
-        ' \n\nWe just made an account for our store on the Storebhai app. It makes it very easy for you to order from our store.' +
-        ' \n\nSo please use the Storebhai app and send us your order. It will be a better experience.' +
-        ' \n\nPlease install the app from this link now: \n' +
-        ' http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ';
+        ' \n\n' +
+        storeName +
+        ' is now on Storebhai! ' +
+        ' \n\nSo please use the Storebhai app and send your orders to ' +
+        storeName +
+        '. It is very easy and a better experience.' +
+        ' \n\nInstall the Storebhai app from this link now: ' +
+        ' \n' +
+        ' http://play.google.com/store/apps/details?id=com.storebhai.android_user_app ' +
+        '\n\n' +
+        storeName +
+        ' looks forward to serving your orders on Storebhai.' +
+        '\n\n' +
+        'StayHomeStaySafe, \n' +
+        storeName;
 
       // console.log(
       // 'A OK, will add new customer name ',
