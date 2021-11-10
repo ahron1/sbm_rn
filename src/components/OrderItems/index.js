@@ -72,8 +72,8 @@ const OrderItemsComponent = ({
   // );
   // the conditional assignment is to take care of deletion where the order item details are no longer found after deletion
 
-  let total;
-  let checked;
+  let total = 0;
+  let checked = 0;
   if (Array.isArray(dataOrderItems) && dataOrderItems.length > 0) {
     let prices = dataOrderItems.map(a => a.price * a.available);
     total = prices.reduce((accumulator, currentValue, currentIndex, array) => {

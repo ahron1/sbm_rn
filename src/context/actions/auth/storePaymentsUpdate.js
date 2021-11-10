@@ -25,6 +25,7 @@ const storePaymentsUpdate =
         upiId: upiId,
       })
       .then(res => {
+        // console.log('in store payments update. success is >> ', res.data);
         dispatch({
           type: STORE_PAYMENTS_UPDATE_SUCCESS,
           payload: {
