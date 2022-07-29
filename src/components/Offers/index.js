@@ -26,6 +26,7 @@ const OffersComponent = () => {
   let customerView;
 
   const offersData = [
+    /*
     {
       id: 1,
       name: 'foo',
@@ -42,6 +43,7 @@ const OffersComponent = () => {
       offerPrice: '180',
       active: true,
     },
+  */
   ];
 
   const ListHeaderComponent = () => {
